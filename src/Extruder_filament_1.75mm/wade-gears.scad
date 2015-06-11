@@ -26,7 +26,12 @@ m3_nut_diameter = 5.8;
 
 gear_distance = 40;
 
+/*
+rotate([180, 0, 0]) 
 small();
+*/
+
+
 //%translate([gear_distance, 0, 0]) rotate([0, 180, 92]) big(); //this should touch, teeth should mesh
 translate([-gear_distance - 10, 10, 0]) big();
 

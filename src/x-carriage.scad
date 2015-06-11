@@ -8,6 +8,7 @@
 include <../configuration.scad>
 use <inc/bearing.scad>
 x_rod_distance = 45;
+fix_teeth_count = 7;
 
 module x_carriage_base(){
  // Small bearing holder
@@ -24,19 +25,31 @@ module x_carriage_base(){
 }
 
 module x_carriage_beltcut(){
- position_tweak=-1.2;
- // Cut in the middle for belt
- translate([-2.5-16.5+1,19,7]) cube([4.5,13,15]);
- // Cut clearing space for the belt
- translate([-39,5,7]) cube([50,13,15]);
- // Belt slit
- translate([-50,21.5+10,6]) cube([67,0.7,15]);
- // Smooth entrance
- translate([-56,21.7+10,16.5]) rotate([45,0,0]) cube([67,15,15]);
- // Teeth cuts
-   for ( i = [0 : 33] ){											  //cube([1,1.7,15]) GT2 a cube([1.7,1.7,15]) T2.5
-	translate([15-i*belt_tooth_distance+position_tweak,21.9+8,6+1.5]) cube([belt_tooth_ratio*belt_tooth_distance,1.7,15]);
-   }
+    tooth_size = belt_tooth_ratio*belt_tooth_distance;
+    echo(tooth_size);
+    // Cut clearing space for the belt
+    translate([-39,5,7]) cube([50,13,15]);
+    // Belt slit
+    translate([-50,31.5,6]) cube([67,0.7,15]);
+    // left belt slit inlet
+    translate([-46,29.5,6]) cube([10,3,15]);
+    // right belt slit inlet
+    translate([3,29.5,6]) cube([10,3,15]);
+    // Smooth entrance
+    translate([-56,21.7+10,16]) rotate([45,0,0]) cube([67,15,15]);
+    // Teeth cuts
+    for ( i = [0 : fix_teeth_count + 1] ){
+        translate([i*belt_tooth_distance-36-tooth_size,21.9+8,7.5]) cube([belt_tooth_ratio*belt_tooth_distance,1.7,15]);
+    }
+
+    for ( i = [0 : fix_teeth_count + 1] ){
+        translate([-i*belt_tooth_distance+3,21.9+8,6+1.5]) cube([belt_tooth_ratio*belt_tooth_distance,1.7,15]);
+    }
+
+    // Middle belt opening
+    left_opening_border =-36+fix_teeth_count*belt_tooth_distance; 
+    right_opening_border =3-fix_teeth_count*belt_tooth_distance-left_opening_border; 
+    translate([left_opening_border,18,7.5]) cube([right_opening_border,14,15]);	   
 }
 
 module x_carriage_holes(){
