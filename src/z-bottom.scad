@@ -50,7 +50,7 @@ module z_bottom_cuts(){
 module z_bottom_holes(){
 
  // M8 rod hole
- translate([5+4.35,21.3+base_offset,-0.1]) rotate([0,0,0]) cylinder(r = M8_smooth_rod_diameter_catch/2, h = 20, $fn = 30);
+ translate([5+4.35,21.3+base_offset,-0.1]) rotate([0,0,0]) cylinder(r = M8_smooth_rod_diameter_catch/2, h = 7, $fn = 30);
 
  // Stepper hole
  translate([5+5.65,base_offset+5.65,-0.1]){

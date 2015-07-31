@@ -1,0 +1,9 @@
+Optimalizace modelu pro tisk 
+
+Vyhladit model ozubenych kol. Zvazit modifikaci zubu kola, tak aby nevznikal pri tisku otrep v ozubeni. 
+
+U drzaku extruderu vyhladit zub na vystupku s dirou pro motor. 
+
+Nastaveni tisku
+
+Snizit mnozstvi vyplne na cca 20%. Asi pouzivat spis typ vyplne Honeycomp, nez reclinear. Honeykomb ma zda se vetsi prispevek k pevnosti. 
