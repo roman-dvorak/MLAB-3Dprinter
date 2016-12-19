@@ -1,21 +1,21 @@
 // Layer high for the printing [mm]
-layer_height = 0.25; //Slic3r->Print Settings->Layers and perimeters->Layer height
+layer_height = 0.20; //Slic3r->Print Settings->Layers and perimeters->Layer height
 
 // Spare for the screws heads [mm]
-spare = 1;
+spare = 0.75;
 // M6 screw diameter [mm]
-M6_head_diameter = 13+spare;
+M6_head_diameter = 13.6+spare;
 //M6_head_diameter = 10.6+spare;
 //M6_head_diameter = 12+spare;
 
 // M6 head high (for hiding it) [mm]
-M6_head_height = 4;
-//M6_head_height = 3.6;
+//M6_head_height = 4;
+M6_head_height = 3.6;
 //M6_head_height = 4.5;
 
 // Screws and rods diameters
-M8_smooth_rod_diameter = 8.3;
-M8_smooth_rod_diameter_catch = 8.8;
+M8_smooth_rod_diameter = 7.8;
+M8_smooth_rod_diameter_catch = 15; //8.8;
 M6_diameter = 6.6;
 M6_diamater_horizontal = 6.5;
 M3_diameter = 3.7;
