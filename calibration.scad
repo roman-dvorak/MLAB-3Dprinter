@@ -11,7 +11,7 @@ difference(){
 		cylinder(r=M3_diameter/2,h=7,$fn=16);	
 		translate([0,0,3.5])cylinder(r=M3_nut_diameter/2,h=2.6,$fn=6);
 	}
-	%translate([M6_diameter+M8_smooth_rod_diameter,M8_smooth_rod_diameter+3,layer_height])cylinder(h=7,r=M8_smooth_rod_diameter/2,$fn = 30);
+	translate([M6_diameter+M8_smooth_rod_diameter,M8_smooth_rod_diameter+3,layer_height])cylinder(h=7,r=M8_smooth_rod_diameter/2,$fn = 30);
 	translate([34.5,M8_smooth_rod_diameter+3,-1])cylinder(h=7,r=M8_smooth_rod_diameter/2,$fn = 32);
 	
 	translate([M6_diameter+4,34,10]) 

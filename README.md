@@ -15,7 +15,3 @@ To continue OpenSCAD has to be installed and available as `openscad` command.
 
 When satisfied, run `make clean && make all`. That produces STLs with your tweeks.
 
-Note about the language
-=======================
-
-Originally, almost everything in this repository was in Czech, in order to spread awareness of RebeliX abroad, we've translated stuff to English. However, part of git history is in Czech, as we don't want to rebase the whole repository. Sorry for that.
