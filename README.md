@@ -4,8 +4,13 @@ RebeliX – a 3D printer inspired by constructions of Rebel II a Prusa i3. Licen
 
 ![RebeliX](Rebelix_render.png "Preview of assembled printer" )
 
+
+
 Build
 =====
+
+   sudo pip install stlsort
+
 
 To continue OpenSCAD has to be installed and available as `openscad` command.
 

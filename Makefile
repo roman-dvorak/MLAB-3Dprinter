@@ -1,5 +1,5 @@
 STL_DIR=STL
-IMG_DIR=PNGs
+IMG_DIR=images
 SRC_DIR=src
 PLATE_DIMMENSIONS=120
 SIMARRANGE=/usr/local/bin/simarrange
