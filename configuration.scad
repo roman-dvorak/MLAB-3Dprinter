@@ -15,7 +15,7 @@ M6_head_height = 3.6;
 
 // Screws and rods diameters
 M8_smooth_rod_diameter = 8.3;
-M8_smooth_rod_diameter_catch = 8.6;
+M8_smooth_rod_diameter_catch = 8.4;
 M6_diameter = 6.6;
 M6_diamater_horizontal = 6.5;
 M3_diameter = 3.7;
