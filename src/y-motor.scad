@@ -70,3 +70,9 @@ difference(){
 	y_motor_cuts();
 	y_motor_holes();
 }	
+
+translate([0,-13,0]) mirror([0,1,0]) difference(){
+    y_motor_base();
+    y_motor_cuts();
+    y_motor_holes();
+}   
