@@ -17,12 +17,12 @@ module belt_holder_base(){
 }
 
 module belt_holder_beltcut(){
-tooth_size = belt_tooth_ratio*belt_tooth_distance;
+ tooth_size = belt_tooth_ratio*belt_tooth_distance;
  echo(tooth_size);
  // Belt slit
- translate([-66,-0.5+10,3]) cube([67,0.55,15]);
+ translate([-66,-0.5+x_offset + belt_tooth_height,3]) cube([67,belt_thickness - belt_tooth_height,15]);
  // Smooth insert cutout
- translate([-66,-0.5+10,12]) rotate([45,0,0]) cube([67,15,15]);
+ translate([-66, -0.5+10, 12]) rotate([45,0,0]) cube([67,15,15]);
  // Individual teeth
     for ( i = [0 : fix_teeth_count + 1] ){
             translate([(-i*belt_tooth_distance)-x_offset,-0.5+x_offset,3]) cube([belt_tooth_ratio*belt_tooth_distance,1.7,15]);
