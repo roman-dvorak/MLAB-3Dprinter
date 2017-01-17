@@ -58,6 +58,8 @@ extrusion_width = 0.66; //Slic3r->Print Settings->Advanced->Default extrusion wi
 // GT2 
 belt_tooth_distance = 2;
 belt_tooth_ratio = 0.5;
+belt_tooth_height = 1.4;
+belt_thickness = 2.3;
 
 /*
 // T2.5
