@@ -30,7 +30,7 @@ module x_carriage_beltcut(){
     // Cut clearing space for the belt
     translate([-39,5,7]) cube([50,13,15]);
     // Belt slit
-    translate([-50,22+8 + belt_tooth_height, 6]) cube([67,belt_thickness - belt_tooth_height,15]);
+    translate([-50,31.5,6]) cube([67,0.7,15]);
     // left belt slit inlet
     translate([-46,29.5,6]) cube([10,3,15]);
     // right belt slit inlet
@@ -43,7 +43,7 @@ module x_carriage_beltcut(){
     }
 
     for ( i = [0 : fix_teeth_count + 1] ){
-        translate([-i*belt_tooth_distance+3,22+8,6+1.5]) cube([belt_tooth_ratio*belt_tooth_distance,belt_tooth_height,15]);
+        translate([-i*belt_tooth_distance+3,21.9+8,6+1.5]) cube([belt_tooth_ratio*belt_tooth_distance,1.7,15]);
     }
 
     // Middle belt opening

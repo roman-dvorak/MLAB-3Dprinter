@@ -35,14 +35,15 @@ module belt_holder_beltcut(){
  echo(belt_tooth_ratio*belt_tooth_distance);
  position_tweak=-1.1;
  // Belt slit
- translate([0,belt_tooth_height,0]) cube([67, belt_thickness - belt_tooth_height, 15]);
+ //translate([-66,-0.5+10,3]) 
+ translate([0,1.5,0])
+ cube([67,0.8,15]);
  // Smooth insert cutout
- translate([0,belt_tooth_height,5]) rotate([45,0,0]) cube([67,15,15]);
- // belt inlet cutouts
- translate([0,0,0]) cube([5,belt_thickness,15]);
- translate([31,0,0]) cube([10,belt_thickness,15]);
+ //translate([-66,-0.5+10,12]) 
+ translate([0,1.5,5])
+ rotate([45,0,0]) cube([67,15,15]);
  // Individual teeth
  for ( i = [0 : 23] ){
- 	translate([0+i*belt_tooth_distance+position_tweak,0,0]) cube([belt_tooth_ratio*belt_tooth_distance, belt_tooth_height, 15]);
+ 	translate([0+i*belt_tooth_distance+position_tweak,0,0]) cube([belt_tooth_ratio*belt_tooth_distance,1.7,15]);
  }
 }
