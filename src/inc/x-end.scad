@@ -6,6 +6,7 @@
 // http://prusamendel.org
 
 use <bearing.scad>
+use <polyholes.scad>
 rod_distance = 45;
 
 module x_end_base(){
@@ -14,22 +15,27 @@ height = 58;
 translate(v=[-15,-9,height/2]) cube(size = [17,39,height], center = true);
 // Bearing holder
  vertical_bearing_base();	
-//Nut trap
- // Cube
- translate(v=[-2-2,-17,4]) cube(size = [8,16,8], center = true);
+ // Cylinder
+   translate(v=[0,-17,0]) poly_cylinder(h = 8, r=13.5, $fn=25);
  // Hexagon
- translate(v=[0,-17,0]) rotate([0,0,30]) cylinder(h = 8, r=8, $fn = 6);
-}
+ //translate(v=[0,-17,0]) rotate([0,0,30]) cylinder(h = 8, r=8, $fn = 6);
+translate(v=[-6,-10.6,10]) rotate([0,0,48.2]) cube(size = [10,5,1], center = true);   
+ }
 
 module x_end_holes(){
  vertical_bearing_holes();
 // Belt hole
 translate(v=[-1,0,0]){
+// Stress relief
+translate(v=[-5.5-10+1.5,-10-1,30]) cube(size = [18,1,28], center = true);
 difference(){
 	translate(v=[-5.5-10+1.5,-10,30]) cube(size = [10,46,28], center = true);
+
+	
+
 	// Nice edges
-	translate(v=[-5.5-10+1.5,-10,30+23]) rotate([0,45,0]) cube(size = [10,46,28], center = true);
-	translate(v=[-5.5-10+1.5,-10,30+23]) rotate([0,-45,0]) cube(size = [10,46,28], center = true);
+	translate(v=[-5.5-10+1.5-5,-10,30+23]) rotate([0,20,0]) cube(size = [10,46,28], center = true);
+	translate(v=[-5.5-10+1.5+5,-10,30+23]) rotate([0,-20,0]) cube(size = [10,46,28], center = true);
 	translate(v=[-5.5-10+1.5,-10,30-23]) rotate([0,45,0]) cube(size = [10,46,28], center = true);
 	translate(v=[-5.5-10+1.5,-10,30-23]) rotate([0,-45,0]) cube(size = [10,46,28], center = true);
 
@@ -37,14 +43,25 @@ difference(){
 }
 
 // Bottom pushfit rod
-translate(v=[-15,-41.5,6]) rotate(a=[-90,0,0]) pushfit_rod(8.1,50);
+translate(v=[-15,-41.5,6]) rotate(a=[-90,0,0]) pushfit_rod(7.8,50);
 // Top pushfit rod
-translate(v=[-15,-41.5,rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(8.1,50);
-// Nut trap
- translate(v=[0,-17,-0.5]) cylinder(h = 4, r1=3.3, r2=2.8, $fn=25);
- translate(v=[0,-17,3]) rotate([0,0,30]) cylinder(h = 10, r=4.5, $fn = 6);
-}
+translate(v=[-15,-41.5,rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(7.8,50);
 
+// TR Nut trap
+   // Hole for the nut
+    translate(v=[0,-17, -1]) poly_cylinder(h = 9.01, r = 5.1, $fn = 25);
+
+// Screw holes for TR nut
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 9.5, -1]) cylinder(h = 10, r = 1.55, $fn=25);
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, -9.5, -1]) cylinder(h = 10, r = 1.55, $fn=25);
+
+// Nut traps for TR nut screws
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 9.5, 6]) rotate([0, 0, 0])cylinder(h = 3, r = 3.5, $fn=6);
+
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, -9.5, 6]) rotate([0, 0, 30])cylinder(h = 3, r = 3.5, $fn=6);
+    translate([-5.5,-17.2,6]) rotate([0,0,30]) cube([5,5,3]);
+    translate([-0,-17.2,6]) rotate([0,0,60]) cube([5,10,3]);
+}
 
 // Final prototype
 module x_end_plain(){
@@ -54,8 +71,8 @@ module x_end_plain(){
  }
 }
 
-x_end_plain();
-
+//x_end_plain();
+x_end_holes();
 
 module pushfit_rod(diameter,length){
  cylinder(h = length, r=diameter/2, $fn=30);
