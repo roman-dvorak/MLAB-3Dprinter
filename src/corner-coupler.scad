@@ -8,42 +8,43 @@
 
 include <../configuration.scad>
 
-// 4 mm is fine as well
-base_thickness = 5;
 
-module corner_coupler(diameter=M6_diameter/2,width=30,length=60,height=base_thickness,embed=1.5,cut_width=ALU_cut_width){
-	difference(){
-		union(){
-			//Base block
-			cube([length,width,height],center=true);
+module drazka()
+{
+  distance = M6_dia >= profile_nut_width ? M6_dia : profile_nut_width;
+  
+  translate([-30/2+4,0,0]) cylinder(r=4,h=coupler_thickness+1.5,$fn=32,center=true);
+  translate([-distance/2-4,0,0]) cylinder(r=4,h=coupler_thickness+1.5,$fn=32,center=true);
+  translate([-distance/4 - 7.5,0,0]) cube([7 - distance/2,8,coupler_thickness+1.5],center=true);
+	
+  translate([30/2-4,0,0])cylinder(r=4,h=coupler_thickness+1.5,$fn=32,center=true);
+  translate([distance/2+4,0,0])cylinder(r=4,h=coupler_thickness+1.5,$fn=32,center=true);
+  translate([distance/4 + 7.5,0,0]) cube([7 - distance/2,8,coupler_thickness+1.5],center=true);
+}
 
-			//Embedding
-			translate([-length/4,0,height/2])cube([cut_width,width,embed*2],center=true);
-			translate([width/2+0.5,0,height/2])cube([width-1,cut_width,embed*2],center=true);
-		}
-		//Screws holes
-		translate([-length/4,0,embed/2])cylinder(h=height+embed+0.1,r=diameter,$fs=0.5,center=true);
-		translate([width/2,0,embed/2])cylinder(h=height+embed+0.1,r=diameter,$fs=0.5,center=true);
-
-		//Corner cuts
-		translate([0,-width/2-2.5, -height/2-0.1]) 
-		rotate([45,0,0]) 
-		cube([length+0.1,5, 5],center=true);
-
-		translate([0,width/2+2.5, -height/2-0.1]) 
-		rotate([45,0,0]) 
-		cube([length+0.1,5, 5],center=true);
-
-		translate([length/2+2.5,0, -height/2-0.1]) 
-		rotate([0,45,0]) 
-		cube([5,width+0.1, 5],center=true);
-
-		translate([-length/2-2.5,0, -height/2-0.1]) 
-		rotate([0,45,0]) 
-		cube([5,width+0.1, 5],center=true);
-
+module corner_coupler()
+{
+  difference()
+  {
+	union()
+	{
+	  cube([60,30,coupler_thickness]);
+	  translate([15,30/2,(coupler_thickness+1.5)/2]) rotate([0,0,90]) drazka();
+	  translate([45,30/2,(coupler_thickness+1.5)/2]) drazka();
 	}
+		
+	// Otvory pro srouby
+	translate([15,30/2,0])cylinder(h=20,r=M6_dia/2,$fn=32,center=true);
+	translate([45,30/2,0])cylinder(h=20,r=M6_dia/2,$fn=32,center=true);
+		
+	// Zalomene hrany
+	translate([-1,-0.1,-5]) rotate([0,-45,0]) cube([5,40,5]);
+	translate([61,-0.1,-5]) rotate([0,-45,0]) cube([5,40,5]);
+	translate([-0.1,-1,-5]) rotate([45,0,0]) cube([70,5,5]);
+	translate([-0.1,31,-5]) rotate([45,0,0]) cube([70,5,5]);
+  }
 }
 
 corner_coupler();
+
 

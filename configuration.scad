@@ -66,3 +66,8 @@ belt_thickness = 2.3;
 belt_tooth_distance = 2.5;
 belt_tooth_ratio = 0.68;
 */
+
+// Tloustka rohovych spojek
+// 5 mm => sroub M6x14 s podlozkou
+// 3 mm => sroub M6x12 s podlozkou
+coupler_thickness = 3;
