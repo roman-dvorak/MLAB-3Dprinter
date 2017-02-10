@@ -13,7 +13,7 @@ mezera_mezi_deskama=9.5;
 vyska_podlozky=mezera_mezi_deskama-vyska_gumove_nozicky;
 vyska_rantlu=1;
 sila_materialu=1.3;
-prumer_piezo=20;
+prumer_piezo=21; //20 čistá + 1 rezerva
 prekryv_piezo=2; //pro drzák
 m3_prumer=3.2;
 tolerance_zavitu=0.75; //tolerance s poloměru
@@ -21,10 +21,10 @@ material_za_zavitem=6;
 
 
 //pro tisk tělesa
-//z_endstop_piezo_print();
+z_endstop_piezo_print();
 
 //náhled na složené těleso
-z_endstop_piezo_view();
+//z_endstop_piezo_view();
 
 //pro tisk tělesa
 module z_endstop_piezo_print(){
