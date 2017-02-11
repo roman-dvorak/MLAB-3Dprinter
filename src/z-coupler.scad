@@ -89,14 +89,14 @@ module kriz()
         
         //zakulacení osa X
           translate([-2*sirka_profilu,0,coupler_thickness/2])
-       cylinder(r=sirka_profilu/2,h=coupler_thickness,$fn=32,center=true); 
+       cylinder(r=sirka_profilu/2,h=coupler_thickness,$fn=100,center=true); 
         
         translate([2*sirka_profilu,0,coupler_thickness/2])
-       cylinder(r=sirka_profilu/2,h=coupler_thickness,$fn=32,center=true); 
+       cylinder(r=sirka_profilu/2,h=coupler_thickness,$fn=100,center=true); 
         
         //zakulacení osa y
           translate([0,3*sirka_profilu,coupler_thickness/2])
-       cylinder(r=sirka_profilu/2,h=coupler_thickness,$fn=32,center=true); 
+       cylinder(r=sirka_profilu/2,h=coupler_thickness,$fn=100,center=true); 
    
   //drazka osa X  
 for (i = [0 : 3]) {
