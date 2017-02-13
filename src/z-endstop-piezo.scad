@@ -13,11 +13,12 @@ mezera_mezi_deskama=9.5;
 vyska_podlozky=mezera_mezi_deskama-vyska_gumove_nozicky;
 vyska_rantlu=1;
 sila_materialu=1.3;
-prumer_piezo=21; //20 čistá + 1 rezerva
+prumer_piezo=36; //20 čistá + 1 rezerva
 prekryv_piezo=2; //pro drzák
 m3_prumer=3.2;
 tolerance_zavitu=0.75; //tolerance s poloměru
 material_za_zavitem=6;
+m3_prumer_matky=10;
 
 
 //pro tisk tělesa
@@ -34,7 +35,7 @@ difference(){
     z_endstop_piezo_bot_cuts();
 }  
 
-translate([0,30,0])
+translate([0,50,0])
 difference(){
 	z_endstop_piezo_top_base();
     z_endstop_piezo_top_cuts();
@@ -96,7 +97,16 @@ module z_endstop_piezo_bot_cuts(){
      cylinder(h=sila_materialu+0.1, r=m3_prumer/2, center=false);
    
       translate([-roztec_der/2,0,-0.01])
-     cylinder(h=sila_materialu+0.1, r=m3_prumer/2, center=false);   
+     cylinder(h=sila_materialu+0.1, r=m3_prumer/2, center=false);  
+   
+   //otvory na dotažení pro velá pieza
+   translate([roztec_der/2,0,sila_materialu])
+     cylinder(h=mezera_mezi_deskama, r=m3_prumer_matky/2, center=false);
+    
+     translate([-roztec_der/2,0,sila_materialu])
+     cylinder(h=mezera_mezi_deskama, r=m3_prumer_matky/2, center=false); 
+   
+    
   
     //otvor na kabel
      translate([0,(prumer_piezo+sila_materialu-2*tolerance_zavitu+material_za_zavitem)/4+sila_materialu/2,(vyska_podlozky+vyska_rantlu)/2])
