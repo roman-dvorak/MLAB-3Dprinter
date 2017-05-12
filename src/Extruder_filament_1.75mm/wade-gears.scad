@@ -26,12 +26,12 @@ m3_nut_diameter = 5.8;
 
 gear_distance = 40;
 
-translate([0, 0, gear_width / 2 + 4.5])
+translate([0, 0, gear_width / 2 + 9])
     rotate([180, 0, 0]) 
         small();
 
 //%translate([gear_distance, 0, 0]) rotate([0, 180, 92]) big(); //this should touch, teeth should mesh
-translate([-gear_distance - 10, 10, 0]) big();
+translate([-gear_distance - 10, 10, gear_width / 2]) big();
 
 gear_width=12;
 teeth_small=15;
@@ -72,7 +72,7 @@ module small(){
         //bore
         translate([0, 0, -gear_width / 2 + 0.1]) cylinder(r=5.25 / 2, h=gear_width + 9.2);
 
-        translate([0, 0, gear_width / 2 + 4.5]) rotate([0, 90, 0]) {
+        %translate([0, 0, gear_width / 2 + 4.5]) rotate([0, 90, 0]) {
             cylinder(r=m3_diameter / 2, h=20);
             translate([0, 0, 5]) nut(m3_nut_diameter, 2.5, false);
             translate([-10, -m3_nut_diameter / 2, 5]) cube([10, m3_nut_diameter, 2.5]);
