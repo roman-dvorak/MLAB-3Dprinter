@@ -6,7 +6,7 @@ SIMARRANGE=/usr/local/bin/simarrange
 STLSORT=stlsort
 OPENSCAD_APP=openscad
 
-SOURCES=$(wildcard $(SRC_DIR)/*.scad)
+SOURCES=$(wildcard $(SRC_DIR)/*.scad) $(wildcard $(SRC_DIR)/Source_cover/*.scad) $(wildcard $(SRC_DIR)/Extruder_filament_1.75mm/*.scad)
 TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(STL_DIR)/%.stl, $(SOURCES))
 IMAGES=$(patsubst $(SRC_DIR)/%.scad, $(IMG_DIR)/%.png, $(SOURCES))
 
