@@ -22,13 +22,15 @@ use <inc/parametric_involute_gear_v5.0.scad>
 
 
 m3_diameter = 3.4;
-m3_nut_diameter = 5.6;
+m3_nut_diameter = 5.8;
 
 gear_distance = 40;
 
+translate([0, 0, gear_width / 2 + 9])
+    rotate([180, 0, 0]) 
 small();
 //%translate([gear_distance, 0, 0]) rotate([0, 180, 92]) big(); //this should touch, teeth should mesh
-translate([-gear_distance - 10, 10, 0]) big();
+translate([-gear_distance - 10, 10, gear_width / 2])  big();
 
 gear_width=12;
 teeth_small=15;

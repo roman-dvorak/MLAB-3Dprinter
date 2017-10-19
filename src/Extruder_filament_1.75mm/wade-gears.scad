@@ -13,7 +13,7 @@
  * @name Greg's Small Gear
  * @id small-gear
  */
-
+$fn=100;
 include <../../configuration.scad>
 include <inc/metric.scad>
 include <inc/functions.scad>
@@ -28,10 +28,9 @@ gear_distance = 40;
 
 translate([0, 0, gear_width / 2 + 9])
     rotate([180, 0, 0]) 
-        small();
-
+small();
 //%translate([gear_distance, 0, 0]) rotate([0, 180, 92]) big(); //this should touch, teeth should mesh
-translate([-gear_distance - 10, 10, gear_width / 2]) big();
+translate([-gear_distance - 10, 10, gear_width / 2])  big();
 
 gear_width=12;
 teeth_small=15;
@@ -72,7 +71,7 @@ module small(){
         //bore
         translate([0, 0, -gear_width / 2 + 0.1]) cylinder(r=5.25 / 2, h=gear_width + 9.2);
 
-        %translate([0, 0, gear_width / 2 + 4.5]) rotate([0, 90, 0]) {
+        translate([0, 0, gear_width / 2 + 4.5]) rotate([0, 90, 0]) {
             cylinder(r=m3_diameter / 2, h=20);
             translate([0, 0, 5]) nut(m3_nut_diameter, 2.5, false);
             translate([-10, -m3_nut_diameter / 2, 5]) cube([10, m3_nut_diameter, 2.5]);
@@ -119,9 +118,9 @@ module big(){
     }
     //threaded bolt trap
     difference(){
-        translate([0, 0, -gear_width / 2]) cylinder(r=8, h=7 + layer_height * 9);
-        translate([0, 0, -gear_width / 2 + layer_height * 6 + 4]) nut(8.1, h=8);
-        translate([0, 0, -gear_width / 2 - 0.1]) cylinder(r=5.4 / 2, h=gear_width + 9.2,$fn=32);
+        translate([0, 0, -gear_width / 2]) cylinder(r=10, h=7 + layer_height * 9);
+        translate([0, 0, -gear_width / 2 + layer_height * 6 + 2]) nut(13.1, h=10);
+        translate([0, 0, -gear_width / 2 - 0.1]) cylinder(r=m8_diameter / 2, h=gear_width + 9.2);
     }
 
 }

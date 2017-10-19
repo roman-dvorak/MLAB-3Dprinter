@@ -9,7 +9,7 @@ include <inc/polyScrewThread_r1.scad>
 
 roztec_der=41;
 vyska_gumove_nozicky=5;
-mezera_mezi_deskama=9.5;
+mezera_mezi_deskama=16.5;
 vyska_podlozky=mezera_mezi_deskama-vyska_gumove_nozicky;
 vyska_rantlu=1;
 sila_materialu=1.3;
