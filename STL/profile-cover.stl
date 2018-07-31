@@ -160,7 +160,7 @@ solid model
       vertex 10.3 19.7 5
     endloop
   endfacet
-  facet normal 0 0.7071 0.707114
+  facet normal 0 0.707107 0.707107
     outer loop
       vertex 10.25 19.75 4.95
       vertex 10.3 19.7 5
@@ -188,21 +188,21 @@ solid model
       vertex 19.7 19.7 5
     endloop
   endfacet
-  facet normal 0 0.7071 0.707114
+  facet normal 0 0.707107 0.707107
     outer loop
       vertex 10.3 19.7 5
       vertex 19.7 19.7 5
       vertex 19.75 19.75 4.95
     endloop
   endfacet
-  facet normal 0.7071 0 0.707114
+  facet normal 0.707107 0 0.707107
     outer loop
       vertex 19.7 10.3 5
       vertex 19.75 10.25 4.95
       vertex 19.7 19.7 5
     endloop
   endfacet
-  facet normal 0.7071 0 0.707114
+  facet normal 0.707107 0 0.707107
     outer loop
       vertex 19.7 19.7 5
       vertex 19.75 10.25 4.95
