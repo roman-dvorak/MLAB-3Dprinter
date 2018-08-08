@@ -67,7 +67,7 @@
 #define DRIVE_SYSTEM 0
 #define XAXIS_STEPS_PER_MM 80
 #define YAXIS_STEPS_PER_MM 80
-#define ZAXIS_STEPS_PER_MM 4000
+#define ZAXIS_STEPS_PER_MM 408.15
 #define EXTRUDER_FAN_COOL_TEMP 50
 #define PDM_FOR_EXTRUDER 0
 #define PDM_FOR_COOLER 0
@@ -100,10 +100,10 @@
 #define EXT0_MAX_ACCELERATION 1000
 #define EXT0_HEAT_MANAGER 3
 #define EXT0_WATCHPERIOD 1
-#define EXT0_PID_INTEGRAL_DRIVE_MAX 190
-#define EXT0_PID_INTEGRAL_DRIVE_MIN 40
-#define EXT0_PID_PGAIN_OR_DEAD_TIME 4.9
-#define EXT0_PID_I 2
+#define EXT0_PID_INTEGRAL_DRIVE_MAX 250
+#define EXT0_PID_INTEGRAL_DRIVE_MIN 100
+#define EXT0_PID_PGAIN_OR_DEAD_TIME 2
+#define EXT0_PID_I 6
 #define EXT0_PID_D 40
 #define EXT0_PID_MAX 255
 #define EXT0_ADVANCE_K 0
@@ -113,7 +113,7 @@
 #define EXT0_WAIT_RETRACT_UNITS 0
 #define EXT0_SELECT_COMMANDS ""
 #define EXT0_DESELECT_COMMANDS ""
-#define EXT0_EXTRUDER_COOLER_PIN -1
+#define EXT0_EXTRUDER_COOLER_PIN 8
 #define EXT0_EXTRUDER_COOLER_SPEED 255
 #define EXT0_DECOUPLE_TEST_PERIOD 12000
 #define EXT0_JAM_PIN -1
@@ -142,7 +142,7 @@
 #define JAM_ACTION 1
 
 #define RETRACT_DURING_HEATUP true
-#define PID_CONTROL_RANGE 20
+#define PID_CONTROL_RANGE 10
 #define SKIP_M109_IF_WITHIN 2
 #define SCALE_PID_TO_MAX 0
 #define TEMP_HYSTERESIS 0
@@ -159,7 +159,7 @@
 
 // ############# Heated bed configuration ########################
 
-#define HAVE_HEATED_BED 1
+#define HAVE_HEATED_BED 0
 #define HEATED_BED_MAX_TEMP 120
 #define SKIP_M190_IF_WITHIN 3
 #define HEATED_BED_SENSOR_TYPE 14
@@ -176,7 +176,7 @@
 #define HEATED_BED_DECOUPLE_TEST_PERIOD 300000
 #define MIN_EXTRUDER_TEMP 150
 #define MAXTEMP 248
-#define MIN_DEFECT_TEMPERATURE -10
+#define MIN_DEFECT_TEMPERATURE -30
 #define MAX_DEFECT_TEMPERATURE 255
 
 // ##########################################################################################
@@ -236,8 +236,8 @@ It also can add a delay to wait for spindle to run on full speed.
 #define ENDSTOP_PULLUP_Y_MIN true
 #define ENDSTOP_Y_MIN_INVERTING false
 #define MIN_HARDWARE_ENDSTOP_Y true
-#define ENDSTOP_PULLUP_Z_MIN true
-#define ENDSTOP_Z_MIN_INVERTING false
+#define ENDSTOP_PULLUP_Z_MIN false
+#define ENDSTOP_Z_MIN_INVERTING true
 #define MIN_HARDWARE_ENDSTOP_Z true
 #define ENDSTOP_PULLUP_X_MAX true
 #define ENDSTOP_X_MAX_INVERTING false
@@ -258,14 +258,14 @@ It also can add a delay to wait for spindle to run on full speed.
 #define max_software_endstop_z true
 #define ENDSTOP_X_BACK_MOVE 5
 #define ENDSTOP_Y_BACK_MOVE 5
-#define ENDSTOP_Z_BACK_MOVE 2
+#define ENDSTOP_Z_BACK_MOVE 10
 #define ENDSTOP_X_RETEST_REDUCTION_FACTOR 2
 #define ENDSTOP_Y_RETEST_REDUCTION_FACTOR 2
-#define ENDSTOP_Z_RETEST_REDUCTION_FACTOR 2
+#define ENDSTOP_Z_RETEST_REDUCTION_FACTOR 0
 #define ENDSTOP_X_BACK_ON_HOME 1
 #define ENDSTOP_Y_BACK_ON_HOME 1
 #define ENDSTOP_Z_BACK_ON_HOME 0
-#define ALWAYS_CHECK_ENDSTOPS 0
+#define ALWAYS_CHECK_ENDSTOPS 1
 
 // ################# XYZ movements ###################
 
@@ -282,13 +282,13 @@ It also can add a delay to wait for spindle to run on full speed.
 #define X_HOME_DIR -1
 #define Y_HOME_DIR -1
 #define Z_HOME_DIR -1
-#define X_MAX_LENGTH 195
-#define Y_MAX_LENGTH 200
+#define X_MAX_LENGTH 185
+#define Y_MAX_LENGTH 180
 #define Z_MAX_LENGTH 185
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define DISTORTION_CORRECTION 0
+#define DISTORTION_CORRECTION 1
 #define DISTORTION_CORRECTION_POINTS 5
 #define DISTORTION_CORRECTION_R 100
 #define DISTORTION_PERMANENT 1
@@ -320,10 +320,10 @@ It also can add a delay to wait for spindle to run on full speed.
 #define MAX_INACTIVE_TIME 0L
 #define MAX_FEEDRATE_X 80
 #define MAX_FEEDRATE_Y 80
-#define MAX_FEEDRATE_Z 3
+#define MAX_FEEDRATE_Z 30
 #define HOMING_FEEDRATE_X 50
 #define HOMING_FEEDRATE_Y 50
-#define HOMING_FEEDRATE_Z 3
+#define HOMING_FEEDRATE_Z 15
 #define HOMING_ORDER HOME_ORDER_XYZ
 #define ZHOME_MIN_TEMPERATURE 0
 #define ZHOME_HEAT_ALL 1
@@ -342,10 +342,10 @@ It also can add a delay to wait for spindle to run on full speed.
 #define DOUBLE_STEP_DELAY 1 // time in microseconds
 #define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_X 1000
 #define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Y 1000
-#define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Z 100
+#define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Z 500
 #define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_X 1000
 #define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Y 1000
-#define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Z 100
+#define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Z 500
 #define INTERPOLATE_ACCELERATION_WITH_Z 0
 #define ACCELERATION_FACTOR_TOP 100
 #define MAX_JERK 30
@@ -415,19 +415,19 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_Z_OFFSET 0
 #define Z_PROBE_Z_OFFSET_MODE 0
 #define UI_BED_COATING 0
-#define FEATURE_Z_PROBE 0
+#define FEATURE_Z_PROBE 1
 #define Z_PROBE_BED_DISTANCE 10
-#define Z_PROBE_PIN -1
+#define Z_PROBE_PIN ORIG_Z_MIN_PIN
 #define Z_PROBE_PULLUP 0
-#define Z_PROBE_ON_HIGH 0
+#define Z_PROBE_ON_HIGH 1
 #define Z_PROBE_X_OFFSET 0
 #define Z_PROBE_Y_OFFSET 0
 #define Z_PROBE_WAIT_BEFORE_TEST 0
-#define Z_PROBE_SPEED 2
-#define Z_PROBE_XY_SPEED 150
-#define Z_PROBE_SWITCHING_DISTANCE 1
+#define Z_PROBE_SPEED 10
+#define Z_PROBE_XY_SPEED 70
+#define Z_PROBE_SWITCHING_DISTANCE 5
 #define Z_PROBE_REPETITIONS 1
-#define Z_PROBE_HEIGHT 40
+#define Z_PROBE_HEIGHT -0.3
 #define Z_PROBE_START_SCRIPT ""
 #define Z_PROBE_FINISHED_SCRIPT ""
 #define Z_PROBE_REQUIRES_HEATING 0
@@ -452,7 +452,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define BENDING_CORRECTION_A 0
 #define BENDING_CORRECTION_B 0
 #define BENDING_CORRECTION_C 0
-#define FEATURE_AXISCOMP 0
+#define FEATURE_AXISCOMP 1
 #define AXISCOMP_TANXY 0
 #define AXISCOMP_TANYZ 0
 #define AXISCOMP_TANXZ 0
@@ -541,7 +541,7 @@ Values must be in range 1..255
     "bluetoothBaudrate": 115200,
     "xStepsPerMM": 80,
     "yStepsPerMM": 80,
-    "zStepsPerMM": 4000,
+    "zStepsPerMM": 408.15,
     "xInvert": 0,
     "xInvertEnable": 0,
     "eepromMode": 1,
@@ -553,8 +553,8 @@ Values must be in range 1..255
         {
             "id": 0,
             "heatManager": 3,
-            "pidDriveMin": 40,
-            "pidDriveMax": 190,
+            "pidDriveMin": 100,
+            "pidDriveMax": 250,
             "pidMax": 255,
             "sensorType": 14,
             "sensorPin": "TEMP_0_PIN",
@@ -565,8 +565,8 @@ Values must be in range 1..255
             "invertEnable": "0",
             "acceleration": 1000,
             "watchPeriod": 1,
-            "pidP": 4.9,
-            "pidI": 2,
+            "pidP": 2,
+            "pidI": 6,
             "pidD": 40,
             "advanceK": 0,
             "advanceL": 0,
@@ -574,7 +574,7 @@ Values must be in range 1..255
             "waitRetractUnits": 0,
             "waitRetract": 0,
             "stepsPerMM": 514,
-            "coolerPin": -1,
+            "coolerPin": 8,
             "coolerSpeed": 255,
             "selectCommands": "",
             "deselectCommands": "",
@@ -608,7 +608,7 @@ Values must be in range 1..255
     "uiController": 0,
     "xMinEndstop": 2,
     "yMinEndstop": 2,
-    "zMinEndstop": 2,
+    "zMinEndstop": 3,
     "xMaxEndstop": 0,
     "yMaxEndstop": 0,
     "zMaxEndstop": 0,
@@ -622,10 +622,10 @@ Values must be in range 1..255
     "yHomingSpeed": 50,
     "yTravelAcceleration": 1000,
     "yPrintAcceleration": 1000,
-    "zMaxSpeed": 3,
-    "zHomingSpeed": 3,
-    "zTravelAcceleration": 100,
-    "zPrintAcceleration": 100,
+    "zMaxSpeed": 30,
+    "zHomingSpeed": 15,
+    "zTravelAcceleration": 500,
+    "zPrintAcceleration": 500,
     "xMotor": {
         "name": "X motor",
         "step": "ORIG_X_STEP_PIN",
@@ -653,10 +653,10 @@ Values must be in range 1..255
     "xMinPos": 0,
     "yMinPos": 0,
     "zMinPos": 0,
-    "xLength": 195,
-    "yLength": 200,
+    "xLength": 185,
+    "yLength": 180,
     "zLength": 185,
-    "alwaysCheckEndstops": "0",
+    "alwaysCheckEndstops": "1",
     "disableX": "0",
     "disableY": "0",
     "disableZ": "1",
@@ -739,8 +739,8 @@ Values must be in range 1..255
     "servo2Pin": -1,
     "servo3Pin": -1,
     "featureWatchdog": "0",
-    "hasHeatedBed": "1",
-    "enableZProbing": "0",
+    "hasHeatedBed": "0",
+    "enableZProbing": "1",
     "extrudeMaxLength": 160,
     "homeOrder": "HOME_ORDER_XYZ",
     "featureController": 11,
@@ -981,12 +981,12 @@ Values must be in range 1..255
         "numEntries": 0
     },
     "tempHysteresis": 0,
-    "pidControlRange": 20,
+    "pidControlRange": 10,
     "skipM109Within": 2,
     "extruderFanCoolTemp": 50,
     "minTemp": 150,
     "maxTemp": 248,
-    "minDefectTemp": -10,
+    "minDefectTemp": -30,
     "maxDefectTemp": 255,
     "arcSupport": "1",
     "featureMemoryPositionWatchdog": "1",
@@ -1004,16 +1004,16 @@ Values must be in range 1..255
     "fanThermoThermistorPin": -1,
     "fanThermoThermistorType": 1,
     "scalePidToMax": 0,
-    "zProbePin": -1,
+    "zProbePin": "ORIG_Z_MIN_PIN",
     "zProbeBedDistance": 10,
     "zProbePullup": "0",
-    "zProbeOnHigh": "0",
+    "zProbeOnHigh": "1",
     "zProbeXOffset": 0,
     "zProbeYOffset": 0,
     "zProbeWaitBeforeTest": "0",
-    "zProbeSpeed": 2,
-    "zProbeXYSpeed": 150,
-    "zProbeHeight": 40,
+    "zProbeSpeed": 10,
+    "zProbeXYSpeed": 70,
+    "zProbeHeight": -0.3,
     "zProbeStartScript": "",
     "zProbeFinishedScript": "",
     "featureAutolevel": "1",
@@ -1023,7 +1023,7 @@ Values must be in range 1..255
     "zProbeY2": 20,
     "zProbeX3": 100,
     "zProbeY3": 160,
-    "zProbeSwitchingDistance": 1,
+    "zProbeSwitchingDistance": 5,
     "zProbeRepetitions": 1,
     "sdSupport": "1",
     "sdCardDetectPin": "ORIG_SDCARDDETECT",
@@ -1031,10 +1031,10 @@ Values must be in range 1..255
     "uiStartScreenDelay": 1000,
     "xEndstopBackMove": 5,
     "yEndstopBackMove": 5,
-    "zEndstopBackMove": 2,
+    "zEndstopBackMove": 10,
     "xEndstopRetestFactor": 2,
     "yEndstopRetestFactor": 2,
-    "zEndstopRetestFactor": 2,
+    "zEndstopRetestFactor": 0,
     "xMinPin": "ORIG_X_MIN_PIN",
     "yMinPin": "ORIG_Y_MIN_PIN",
     "zMinPin": "ORIG_Z_MIN_PIN",
@@ -1052,14 +1052,14 @@ Values must be in range 1..255
     "mixingExtruder": "0",
     "decouplingTestMaxHoldVariance": 20,
     "decouplingTestMinTempRise": 1,
-    "featureAxisComp": "0",
+    "featureAxisComp": "1",
     "axisCompTanXY": 0,
     "axisCompTanXZ": 0,
     "axisCompTanYZ": 0,
     "retractOnPause": 2,
     "pauseStartCommands": "",
     "pauseEndCommands": "",
-    "distortionCorrection": "0",
+    "distortionCorrection": "1",
     "distortionCorrectionPoints": 5,
     "distortionCorrectionR": 100,
     "distortionPermanent": "1",
