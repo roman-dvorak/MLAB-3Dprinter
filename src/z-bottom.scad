@@ -50,7 +50,7 @@ module z_bottom_cuts(){
 module z_bottom_holes(){
 
  // M8 rod hole
- translate([5+4.35,21.3+base_offset,-0.1]) rotate([0,0,0]) cylinder(r = M8_smooth_rod_diameter_catch/2, h = 7, $fn = 30);
+ translate([5+4.35,21.3+base_offset,-0.1]) rotate([0,0,0]) cylinder(r = rod_8mm_d/2, h = 7, $fn = 30);
 
  // Stepper hole
  translate([5+5.65,base_offset+5.65,-0.1]){
@@ -58,6 +58,8 @@ module z_bottom_holes(){
 	translate([31,0,0]) cylinder(h = 20, r=M3_diameter/2, $fn=16);
 	translate([0,31,0]) cylinder(h = 20, r=M3_diameter/2, $fn=16);
  }
+
+ 
  // ALU mount holes
  translate([2.5+21.3+motor_offset,base_offset-M6_head_height-2.5,height/2]) rotate([-90,0,0]) cylinder(r = M6_head_diameter/2, h = 20, $fn = 30);
  translate([2.5+21.3+motor_offset,-3,height/2]) rotate([-90,0,0]) cylinder(r = M6_diamater_horizontal/2, h = 20, $fn = 30);

@@ -66,6 +66,12 @@ module x_end_motor(){
   x_end_motor_base();
   x_end_motor_holes();
  }
+
+ translate([30,0,0]) mirror([1,0,0])
+   difference(){
+    x_end_motor_base();
+    x_end_motor_holes();
+   }
 }
 
 x_end_motor();
