@@ -10,6 +10,7 @@ fan_diameter = 38;
 fan_mount = 33;
 
 mount_height = 8;
+j_mount_groove_height = 6; 
 
 difference(){
 	union(){
@@ -24,8 +25,8 @@ difference(){
 	 translate([-fan_mount/2,0,0]) rotate([-135,0,0]) cylinder(r=1.1,h=30,$fn=20,center=true);
 	}
 	
-	translate([30,10,4.4]) cylinder(r=8.5,h=6,$fn=30);
-	translate([30-8.5,-0.1,4.4]) cube([17,10,6]);
+	translate([30,10,j_mount_groove_height]) cylinder(r=8.5,h=6,$fn=30);
+	translate([30-8.5,-0.1,j_mount_groove_height]) cube([17,10,6]);
 		
 	translate([30,10,-0.1]) cylinder(r=6.1,h=10,$fn=30);
 	translate([30-6.1,-0.1,-0.1]) cube([12.2,10,10]);
