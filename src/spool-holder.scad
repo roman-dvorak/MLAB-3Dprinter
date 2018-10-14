@@ -14,7 +14,8 @@ width = height;
 
 module drzak_zakladna(){
   translate([0,0,0]) cube([width,height,thickness]);
-  translate([width-15-4,-2,0]) cube([8,3,thickness]);
+  translate([width-15-4,-2,0]) cube([8,3,10]);
+  translate([width-15-4,-2,thickness-4]) cube([8,3,4]);
 
 }
 
