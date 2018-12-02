@@ -8,7 +8,7 @@
 include <../configuration.scad>
 use <inc/bearing.scad>
 x_rod_distance = 45;
-fix_teeth_count = 7;
+fix_teeth_count = 6.8; // Pokud je zde cele cislo je na konci "hrebene" takovy zvlastni artefakt
 
 module x_carriage_base(){
  // Small bearing holder
@@ -47,9 +47,9 @@ module x_carriage_beltcut(){
     }
 
     // Middle belt opening
-    left_opening_border =-36+fix_teeth_count*belt_tooth_distance; 
-    right_opening_border =3-fix_teeth_count*belt_tooth_distance-left_opening_border; 
-    translate([left_opening_border,18,7.5]) cube([right_opening_border,14,15]);	   
+    left_opening_border =-36+fix_teeth_count*belt_tooth_distance;
+    right_opening_border =3-fix_teeth_count*belt_tooth_distance-left_opening_border;
+    translate([left_opening_border,18,7.5]) cube([right_opening_border,14,15]);
 }
 
 module x_carriage_holes(){
@@ -59,9 +59,9 @@ module x_carriage_holes(){
   translate([-33/2,x_rod_distance+2,0]) rotate([0,0,90]) horizontal_bearing_holes(2);
   // Extruder mounting holes
   translate([-16.5+15,24,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-  translate([-16.5+15,24,10])cylinder(r=M3_nut_diameter/2, h=20, $fn=6); 
+  translate([-16.5+15,24,10])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
   translate([-16.5-15,24,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-  translate([-16.5-15,24,10])cylinder(r=M3_nut_diameter/2, h=20, $fn=6); 	
+  translate([-16.5-15,24,10])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
 }
 
 module x_carriage_fancy(){
@@ -72,7 +72,7 @@ module x_carriage_fancy(){
  // Bottom ĺeft corner
  translate([-33,5,0]) translate([0,-11.5,-1]) rotate([0,0,-135]) translate([0,-15,0]) cube([30,30,20]);
  // Top left corner
- translate([-33-13.5,-5,0]) translate([0,45+11.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);	
+ translate([-33-13.5,-5,0]) translate([0,45+11.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);
 }
 
 // Final part
@@ -80,7 +80,7 @@ module x_carriage(){
  difference(){
   x_carriage_base();
   x_carriage_beltcut();
-  x_carriage_holes();
+  #x_carriage_holes();
   x_carriage_fancy();
  }
 }

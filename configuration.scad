@@ -25,7 +25,7 @@ M3_diameter = 3.7;
 M3_diameter_horizontal = 3.5;
 
 //matice trapézové tyče
-TRAP_diameter_externa=22; //průmer vnější 
+TRAP_diameter_externa=22; //průmer vnější
 
 
 // Nuts diameters
@@ -37,8 +37,8 @@ ALU_cut_width = 7.9;
 ALU_cut_width_horizontal = 7.7;
 
 // Sirka matky do profilu (pokud neni pouzita, tak 0)
-//profile_nut_width = 9.5;
-profile_nut_width = 0; //pro z-top
+profile_nut_width = 10;
+//profile_nut_width = 0; //pro z-top
 
 // Motors length/depth (for axes Z and Y)
 //SX17-1003LQFE (recommended for the Z axis)
@@ -55,17 +55,20 @@ extrusion_width = 0.66; //Slic3r->Print Settings->Advanced->Default extrusion wi
 
 /// Belt type ******************************************************
 
-// GT2 
-belt_tooth_distance = 2;
-belt_tooth_ratio = 0.5;
-belt_tooth_height = 1.4;
-belt_thickness = 2.3;
+// GT2
+//belt_tooth_distance = 2;
+//belt_tooth_ratio = 0.5;
+//belt_tooth_height = 1.4;
+//belt_thickness = 2.3;
 
-/*
+
 // T2.5
 belt_tooth_distance = 2.5;
 belt_tooth_ratio = 0.68;
-*/
+
+// Z screw......
+
+
 
 // Tloustka rohovych spojek
 // 5 mm => sroub M6x14 s podlozkou
