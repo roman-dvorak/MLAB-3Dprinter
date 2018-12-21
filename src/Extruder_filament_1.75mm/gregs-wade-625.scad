@@ -271,23 +271,21 @@ module wade(
 
 			// Round the ends of the base
 			translate([base_length-base_leadout,0,0])
-			cylinder(r=base_thickness/2,h=wade_block_depth+base_extra_depth,$fn=64);
+		         cylinder(r=base_thickness/2,h=wade_block_depth+base_extra_depth,$fn=64);
 
 			translate([-base_leadout,0,0])
-			cylinder(r=base_thickness/2,h=wade_block_depth+base_extra_depth,$fn=64);
+		         cylinder(r=base_thickness/2,h=wade_block_depth+base_extra_depth,$fn=64);
 
 			//Provide the bevel betweeen the base and the wade block.
 			render()
 			difference()
 			{
-				translate([-block_bevel_r+wade_body_offset,0,0])
-				cube([block_bevel_r*2+wade_block_width,
-					base_thickness/2+block_bevel_r,wade_block_depth+base_extra_depth]);
-				translate([-block_bevel_r+wade_body_offset,block_bevel_r+base_thickness/2])
-				cylinder(r=block_bevel_r,h=wade_block_depth+base_extra_depth,$fn=60);
-				translate([wade_block_width+block_bevel_r+wade_body_offset,
-					block_bevel_r+base_thickness/2])
-				cylinder(r=block_bevel_r,h=wade_block_depth+base_extra_depth,$fn=60);
+				translate([-block_bevel_r+wade_body_offset, 0, 0])
+		            cube([block_bevel_r*2+wade_block_width, base_thickness/2+block_bevel_r, wade_block_depth+base_extra_depth]);
+				translate([-block_bevel_r+wade_body_offset, block_bevel_r+base_thickness/2])
+		            cylinder(r=block_bevel_r, h=wade_block_depth+base_extra_depth, $fn=60);
+				translate([wade_block_width+block_bevel_r+wade_body_offset, block_bevel_r+base_thickness/2])
+		            cylinder(r=block_bevel_r, h=wade_block_depth+base_extra_depth,$fn=60);
 			}
 			// Uprava_3 - "Domecek" pro idler
 			translate([wade_body_offset,0,0]) difference(){
@@ -299,7 +297,7 @@ module wade(
 
 			//The base.
 			translate([-base_leadout,-base_thickness/2,0])
-			cube([base_length,base_thickness,wade_block_depth+base_extra_depth]);
+		         cube([base_length,base_thickness,wade_block_depth+base_extra_depth]);
 			//Base aligement helper
 			//translate([-base_leadout,-base_thickness/2,wade_block_depth+base_extra_depth])
 			//cube([base_length,1,layer_thickness-0.35]);
@@ -383,70 +381,76 @@ echo("bhmh", mounting_holes)
 				wade_block_depth]);
 
 			translate([0,0,-1])
-			b608(h=625_height+1);
+		         b608(h=625_height+1);
 
 			// Uprava_1 - Vyrez pro lozisko
-			translate([0,-hole_for_625/2,625_height]) rotate([0,180,0]) cube([30,hole_for_625,10]);
+			translate([0,-hole_for_625/2,625_height])
+                rotate([0,180,0])
+                    cube([30,hole_for_625,10]);
 
 			translate([0,0,23])
-			b608(h=625_height);
+		         b608(h=625_height);
 
 			translate([-11.5,1,625_height+3])
-			b608(h=wade_block_depth);
+		         b608(h=wade_block_depth);
 
 			// Uprava_4 - Zkraceni dilu
-			translate([-15,-22.3/2,-0.1]) cube([7,50,wade_block_depth+1]);
-			translate([-10,-hole_for_625/2,23]) cube(10,10,9);
+			translate([-15,-22.3/2,-0.1])
+                cube([7,50,wade_block_depth+1]);
+			translate([-10,-hole_for_625/2,23])
+                cube(10,10,9);
 
 			translate([0,0,625_height+2*layer_thickness])
-			cylinder(r=m8_clearance_hole/2,h=wade_block_depth-(8+layer_thickness)+2,$fn=64);
+			    cylinder(r=m8_clearance_hole/2,h=wade_block_depth-(8+layer_thickness)+2,$fn=64);
 
 			// Uprava_2 - Vyrez pro hnaci sroub
-			translate([0,m8_clearance_hole/2,625_height+2*layer_thickness]) rotate([0,0,180])cube([15,m8_clearance_hole,5]);
+			translate([0,m8_clearance_hole/2,625_height+2*layer_thickness])
+                rotate([0,0,180])
+                    cube([15,m8_clearance_hole,5]);
 
 			//opraveno r
 			translate([0,0,20-2])
-			cylinder(r=16/4,h=wade_block_depth-(8+layer_thickness)+2);
+			    cylinder(r=16/4,h=wade_block_depth-(8+layer_thickness)+2);
 
 			// Filament feed.
 			translate([-filament_feed_hole_offset,0,wade_block_depth/2])
-			rotate([90,0,0])
-			rotate(360/16)
-			cylinder(r=filament_feed_hole_d/2,h=wade_block_depth*3+elevation,center=true,$fn=8);
+		         rotate([90,0,0])
+	                  rotate(360/16)
+                           cylinder(r=filament_feed_hole_d/2,h=wade_block_depth*3+elevation,center=true, $fn=25);
 
 					// Vetsi otvor pro vstup filamentu
 			translate([-filament_feed_hole_offset,50,wade_block_depth/2])
-			rotate([90,0,0])
-			rotate(360/16)
-			cylinder(r=(filament_feed_hole_d/2)+0.4,h=wade_block_depth*3+elevation,center=true,$fn=8);
+		         rotate([90,0,0])
+		              rotate(360/16)
+	                      cylinder(r=(filament_feed_hole_d/2)+0.4,h=wade_block_depth*3+elevation,center=true, $fn=25);
 
 			// Uprava_5 - Nabeh pro filament
 			translate([-filament_feed_hole_offset,-9.5,wade_block_depth/2])
-			rotate([90,0,0])
-			cylinder(r1=filament_feed_hole_d/2+0.5,r2=filament_feed_hole_d/2,h=8,center=true,$fn=18);
+	              rotate([90,0,0])
+		               cylinder(r1=filament_feed_hole_d/2+0.5,r2=filament_feed_hole_d/2,h=8,center=true, $fn=25);
 
 			translate([-9,-m8_clearance_hole/2,625_height+2*layer_thickness])
-			cube([9,m8_clearance_hole,20]);
+		         cube([9,m8_clearance_hole,20]);
 
 			// Mounting holes on the base.
 			//translate([0,-base_thickness/2,0])
 			translate(
 				(mounting_holes==mounting_holes_legacy)?[-3.4,0,-1]:[0,0,0])
-			for (mount=[0:1])
-			{
-				translate([-filament_feed_hole_offset+25*((mount<1)?1:-1),
-					-large_wheel_translation[1]-1-base_thickness/2,wade_block_depth/2])
-				rotate([-90,0,0])
-				rotate(360/16)
-				cylinder(r=m4_diameter/2,h=base_thickness+2,$fn=8);
-				// Posun hlavicky M4 sroubu o 2.1 mm
-				translate([-filament_feed_hole_offset+25*((mount<1)?1:-1),
-					-large_wheel_translation[1]+2.1,
-					wade_block_depth/2])
-				rotate([-90,0,0])
-				// M4 na pridelani hotendu
-				cylinder(r=m4_nut_diameter/2,h=10,$fn=6);
-			}
+    			for (mount=[0:1])
+    			{
+    				translate([-filament_feed_hole_offset+25*((mount<1)?1:-1),
+    					-large_wheel_translation[1]-1-base_thickness/2,wade_block_depth/2])
+    				rotate([-90,0,0])
+			            rotate(360/16)
+			                cylinder(r=m4_diameter/2,h=base_thickness+2,$fn=8);
+    				// Posun hlavicky M4 sroubu o 2.1 mm
+    				translate([-filament_feed_hole_offset+25*((mount<1)?1:-1),
+    					-large_wheel_translation[1]+2.1,
+    					wade_block_depth/2])
+		                rotate([-90,0,0])
+	                       // M4 na pridelani hotendu
+	                       cylinder(r=m4_nut_diameter/2,h=10,$fn=6);
+    			}
 
 	}
 
@@ -458,17 +462,32 @@ echo("bhmh", mounting_holes)
 			wade_block_depth/2+idler_mounting_hole_across*idle])
 		rotate([0,90,0])
 		{
-			rotate([0,0,180/8])
-			translate([0,0,-1])
-			cylinder(r=(m3_diameter+0.6)/2,h=wade_block_depth,$fn=8);
-			rotate([0,0,180/6])
-			translate([0,0,wade_block_width-idler_nut_trap_depth])
-			cylinder(r=m3_nut_diameter/2+0.1,h=idler_nut_thickness,$fn=6);
-
+			rotate([0,0,180/8+22*idle])
+		         translate([0,0,-1])
+		              cylinder(r=(m3_diameter+0.6)/2,h=wade_block_depth,$fn=20);
+			rotate([0,0,180/6+22*idle])
+		         translate([0,0,wade_block_width-idler_nut_trap_depth])
+		              cylinder(r=m3_nut_diameter/2+0.1,h=idler_nut_thickness,$fn=6);
+            rotate([0,0,22*idle])
 			translate([0,10/2,wade_block_width-idler_nut_trap_depth+idler_nut_thickness/2])
-			cube([m3_nut_diameter*cos(30)+0.1,10,idler_nut_thickness],center=true);
+	              cube([m3_nut_diameter*cos(30)+0.1,10,idler_nut_thickness],center=true);
 		}
 	}
+
+    translate([large_wheel_translation[0]-filament_feed_hole_offset,
+        idler_mounting_hole_up+large_wheel_translation[1],
+        wade_block_depth/2]){
+
+        translate([-0.75-0.5,0,0.8])
+            cube([10, 10, 2.4]);
+
+        translate([-0.75-0.5,0, -0.8-2.4])
+            cube([10, 10, 2.4]);
+
+        translate([0, 0, -2.45])
+            cube([3, 10, 4.9]);
+
+    }
 }
 
 module motor_mount()
@@ -703,11 +722,11 @@ module malcolm_hotend_holes ()
 module groovemount_holes ()
 {
 	extruder_recess_d=16.4;
-	extruder_recess_h=5.5;
+	extruder_recess_h=4.5;
 
 	// Recess in base
 	translate([0,0,-1])
-	cylinder(r=extruder_recess_d/2,h=extruder_recess_h+1);
+	cylinder(r=extruder_recess_d/2,h=extruder_recess_h+1, $fn=50);
 }
 
 //peek_reprapsource_holes ();
@@ -760,7 +779,7 @@ module mendel_parts_v6_holes (insulator_d=12.7)
 
 	// Recess in base
 	translate([0,0,-1])
-	cylinder(r=extruder_recess_d/2,h=extruder_recess_h+1);
+	   cylinder(r=extruder_recess_d/2,h=extruder_recess_h+1);
 
 	for(mount=[-1,1])
 	rotate([0,0,hole_axis_rotation+90+90*mount])

@@ -11,7 +11,7 @@ use <bearing.scad>
 use <polyholes.scad>
 
 rod_distance = 45;
-z_thread_diameter = 12;
+z_thread_diameter = 10.5;
 
 
 module x_end_base(){
@@ -52,14 +52,14 @@ translate(v=[-15,-41.5,rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(7.8,50);
 
 // TR Nut trap
    // Hole for the nut
-    translate(v=[0,-17, -1]) poly_cylinder(h = 9.01, r = z_thread_diameter/2 + 0.2, $fn = 25);
+    translate(v=[0,-17, -1]) poly_cylinder(h = 9.01, r = z_thread_diameter/2, $fn = 50);
 
 // Screw holes for TR nut
-    #translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 7.95, -1]) cylinder(h = 10, r = 1.6, $fn=25);
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 7.95, -1]) cylinder(h = 10, r = 1.6, $fn=25);
     translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, -7.95, -1]) cylinder(h = 10, r = 1.6, $fn=25);
 
 // Nut traps for TR nut screws
-    #translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 7.95, 6]) rotate([0, 0, 0])cylinder(h = 3, r = 3.7, $fn=6);
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 7.95, 6]) rotate([0, 0, 0])cylinder(h = 3, r = 3.7, $fn=6);
     translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, -7.95, 6]) rotate([0, 0, 30])cylinder(h = 3, r = 3.7, $fn=6);
     translate([-5.5,-17.2,6]) rotate([0,0,30]) cube([5,5,3]);
     translate([-0,-17.2,6]) rotate([0,0,60]) cube([5,10,3]);

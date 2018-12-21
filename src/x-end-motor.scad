@@ -1,4 +1,4 @@
-// PRUSA iteration3
+    // PRUSA iteration3
 // x end motor
 // GNU GPL v3
 // Josef Průša <iam@josefprusa.cz> and contributors
@@ -74,11 +74,11 @@ module x_end_motor(){
   x_end_motor_holes();
  }
 
- //translate([30,0,0]) mirror([1,0,0])
- //  difference(){
- //  x_end_motor_base();
- //  x_end_motor_holes();
- //}
+ translate([30,0,0]) mirror([1,0,0])
+   difference(){
+   x_end_motor_base();
+   x_end_motor_holes();
+ }
 }
 
 x_end_motor();
