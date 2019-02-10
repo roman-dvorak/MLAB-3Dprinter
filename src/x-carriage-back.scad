@@ -11,7 +11,7 @@ use <inc/bearing.scad>
 x_rod_distance = 45;
 fix_teeth_count = 6.8; // Pokud je zde cele cislo je na konci "hrebene" takovy zvlastni artefakt
 
-module x_carriage_base(){
+module x_carriage_back_base(){
  // Small bearing holder
  hull(){
      translate([-33/2,+2,0]) rotate([0,0,90]) horizontal_bearing_base(2);
@@ -29,7 +29,7 @@ module x_carriage_base(){
  translate([-1.5,-11.5-6,0]) cube([15,68+6+6+3, 12]);
 }
 
-module x_carriage_beltcut(){
+module x_carriage_back_beltcut(){
     tooth_size = belt_tooth_ratio*belt_tooth_distance;
     echo(tooth_size);
     // Cut clearing space for the belt
@@ -57,62 +57,37 @@ module x_carriage_beltcut(){
     translate([left_opening_border,18,7.5]) cube([right_opening_border,14,15]);
 }
 
-module x_carriage_holes(){
+module x_carriage_back_holes(){
  // Small bearing holder holes cutter
-  translate([-33/2,2,0]) rotate([0,0,90]) horizontal_bearing_holes(2, 1);
+  translate([-33/2,2,0]) rotate([0,0,90]) horizontal_bearing_holes(2, 0);
  // Long bearing holder holes cutter
-  translate([-33/2,x_rod_distance+2,0]) rotate([0,0,90]) horizontal_bearing_holes(2, 1);
+  translate([-33/2,x_rod_distance+2,0]) rotate([0,0,90]) horizontal_bearing_holes(2, 0);
   // Extruder mounting holes
-  translate([-16.5+15,24+2,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-  translate([-16.5+15,24+2,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
-  translate([-16.5-15,24+2,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-  translate([-16.5-15,24+2,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
-  translate([-16.5+1,24+31+2,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-  translate([-16.5+1,24+31+2,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
+  translate([-16.5+15,24,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+  translate([-16.5+15,24,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
+  translate([-16.5-15,24,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+  translate([-16.5-15,24,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
 }
 
-module x_carriage_fancy(){
+module x_carriage_back_fancy(){
  // Top right corner
- translate([13.5, 0,0]) translate([0,45+12.5,-1]) rotate([0,0,45]) translate([0,-15,0]) cube([30,30,20]);
+ translate([13.5,-5,0]) translate([0,45+12.5,-1]) rotate([0,0,45]) translate([0,-15,0]) cube([30,30,20]);
  // Bottom right corner
  translate([13.5,5,0]) translate([0,-12.5,-1]) rotate([0,0,-45]) translate([0,-15,0]) cube([30,30,20]);
  // Bottom ĺeft corner
  translate([-33-13.5,5,0]) translate([0,-12.5,-1]) rotate([0,0,-135]) translate([0,-15,0]) cube([30,30,20]);
  // Top left corner
- translate([-33-13.5,0,0]) translate([0,45+12.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);
-}
-
-module x_carriage_mountholes(){
-    translate([-16.5, 0, 0]){
-        translate([+20,-10, 4.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([+20,-10, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
-
-        translate([-20, -10, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([-20, -10, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
-
-        translate([+25, 25, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([+25, 25, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
-
-        translate([-25, 25, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([-25, 25, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
-
-        translate([+20, 60, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([+20, 60, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
-
-        translate([-20, 60, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([-20, 60, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
-    }
+ translate([-33-13.5,-5,0]) translate([0,45+12.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);
 }
 
 // Final part
-module x_carriage(){
+module x_carriage_back(){
  difference(){
-  x_carriage_base();
-  x_carriage_beltcut();
-  x_carriage_holes();
-  x_carriage_mountholes();
-  x_carriage_fancy();
+  x_carriage_back_base();
+  x_carriage_back_beltcut();
+  x_carriage_back_holes();
+  x_carriage_back_fancy();
  }
 }
 
-x_carriage();
+x_carriage_back();

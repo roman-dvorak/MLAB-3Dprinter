@@ -169,8 +169,8 @@ m4_nut_diameter = 8.3;
 block_bevel_r=7;
 
 base_thickness=10;
-base_length=57;
-base_leadout=22;
+base_length=57+10;
+base_leadout=22+5;
 base_extra_depth=3; //zmeneno puvodne 0
 
 nema17_hole_spacing=31;
@@ -261,27 +261,30 @@ module wade(
 		{
 			// The wade block.
 			translate([wade_body_offset,0,0])
-			cube([wade_block_width,wade_block_height,wade_block_depth]);
+			    cube([wade_block_width,wade_block_height,wade_block_depth]);
 
 			// Filler between wade block and motor mount.
 			translate([10-2,0,0])
-			cube([wade_block_width,
-				wade_block_height,
-				motor_mount_thickness]);
+		        cube([wade_block_width,
+				                wade_block_height, motor_mount_thickness]);
 
 			// Round the ends of the base
-			translate([base_length-base_leadout,0,0])
-		         cylinder(r=base_thickness/2,h=wade_block_depth+base_extra_depth,$fn=64);
+			//translate([base_length-base_leadout,0,0])
+		    //     cylinder(r=base_thickness/2,h=wade_block_depth+base_extra_depth,$fn=64);
 
-			translate([-base_leadout,0,0])
-		         cylinder(r=base_thickness/2,h=wade_block_depth+base_extra_depth,$fn=64);
+			//translate([-base_leadout,0,0])
+		    //     cylinder(r=base_thickness/2,h=wade_block_depth+base_extra_depth,$fn=64);
 
 			//Provide the bevel betweeen the base and the wade block.
 			render()
 			difference()
 			{
-				translate([-block_bevel_r+wade_body_offset, 0, 0])
-		            cube([block_bevel_r*2+wade_block_width, base_thickness/2+block_bevel_r, wade_block_depth+base_extra_depth]);
+                union(){
+	                translate([-block_bevel_r+wade_body_offset, 0, 0])
+		                  cube([block_bevel_r*2+wade_block_width, base_thickness/2+block_bevel_r, wade_block_depth+base_extra_depth]);
+                    translate([9.5, 30, 0])
+    		            cylinder(h = wade_block_depth+base_extra_depth, d=10, $fn=40);
+                }
 				translate([-block_bevel_r+wade_body_offset, block_bevel_r+base_thickness/2])
 		            cylinder(r=block_bevel_r, h=wade_block_depth+base_extra_depth, $fn=60);
 				translate([wade_block_width+block_bevel_r+wade_body_offset, block_bevel_r+base_thickness/2])
@@ -368,8 +371,35 @@ echo("bhmh", mounting_holes)
 			translate([0,0,(wade_block_depth+base_extra_depth)/2+6+layer_thickness]) cylinder(r=m3_diameter/2, h=wade_block_depth+0.2+base_extra_depth, center=true, $fn=20);
 			translate([0, 0, 1]) cylinder(r=m3_washer_diameter/2, h=10.1, center=true, $fn=20);
 		}
+
+
+		translate([-35+1,31,0]) {
+			translate([0,0,(wade_block_depth+base_extra_depth)/2+6+layer_thickness]) cylinder(r=m3_diameter/2, h=wade_block_depth+0.2+base_extra_depth, center=true, $fn=20);
+			translate([0, 0, 1]) cylinder(r=m3_washer_diameter/2, h=10.1, center=true, $fn=20);
+		}
 	}
 
+    // diry pro pridelani ramecku pro vetracek na heatbreak....
+    // holes for extruder fan tunnel
+
+    translate([-24.5+64+4,-0.5,3]) {
+        translate([-70,0,2]) {
+            translate([0, 0, 0]) rotate([0, 90, 0]) cylinder(r=m3_diameter/2, h=wade_block_depth, center=true, $fn=20);
+            translate([0, 0, 20]) rotate([0, 90, 0]) cylinder(r=m3_diameter/2, h=wade_block_depth, center=true, $fn=20);
+
+            translate([2, -4, -6/2]) cube([3, 20, 6]);
+            translate([2, -4, 20-6/2]) cube([3, 20, 6]);
+        }
+
+        translate([-4,0,2]){
+            translate([0, 0, 0]) rotate([0, 90, 0]) cylinder(r=m3_diameter/2, h=wade_block_depth-3, center=true, $fn=20);
+            translate([0, 0, 20]) rotate([0, 90, 0]) cylinder(r=m3_diameter/2, h=wade_block_depth-3, center=true, $fn=20);
+
+            translate([-5, -4, -6/2]) cube([3, 20, 6]);
+            translate([-5, -4, 20-6/2]) cube([3, 20, 6]);
+        }
+
+    }
 	//translate(motor_mount_translation)
 	translate(large_wheel_translation)
 	{
@@ -398,7 +428,7 @@ echo("bhmh", mounting_holes)
 			translate([-15,-22.3/2,-0.1])
                 cube([7,50,wade_block_depth+1]);
 			translate([-10,-hole_for_625/2,23])
-                cube(10,10,9);
+                cube([10,10,9]);
 
 			translate([0,0,625_height+2*layer_thickness])
 			    cylinder(r=m8_clearance_hole/2,h=wade_block_depth-(8+layer_thickness)+2,$fn=64);
@@ -406,7 +436,7 @@ echo("bhmh", mounting_holes)
 			// Uprava_2 - Vyrez pro hnaci sroub
 			translate([0,m8_clearance_hole/2,625_height+2*layer_thickness])
                 rotate([0,0,180])
-                    cube([15,m8_clearance_hole,5]);
+                    cube([15,m8_clearance_hole-2,5]);
 
 			//opraveno r
 			translate([0,0,20-2])
@@ -426,12 +456,23 @@ echo("bhmh", mounting_holes)
 
 			// Uprava_5 - Nabeh pro filament
 			translate([-filament_feed_hole_offset,-9.5,wade_block_depth/2])
-	              rotate([90,0,0])
-		               cylinder(r1=filament_feed_hole_d/2+0.5,r2=filament_feed_hole_d/2,h=8,center=true, $fn=25);
+	           rotate([90,0,0])
+		            cylinder(r1=filament_feed_hole_d/2+0.5,r2=filament_feed_hole_d/2,h=8,center=true, $fn=25);
 
-			translate([-9,-m8_clearance_hole/2,625_height+2*layer_thickness])
-		         cube([9,m8_clearance_hole,20]);
+            hull(){
+                translate([-9,-m8_clearance_hole/2+1, wade_block_depth-625_height-2*layer_thickness])
+		              cube([9,m8_clearance_hole-1,1]);
 
+                translate([-9,-m8_clearance_hole/2+2,625_height+2*layer_thickness+8])
+                    cube([9,m8_clearance_hole-2,10]);
+            }
+            hull(){
+                translate([-9,-m8_clearance_hole/2+2,625_height+2*layer_thickness])
+                    cube([9,m8_clearance_hole-2,10]);
+
+                translate([-9,-m8_clearance_hole/2+1, 625_height+2*layer_thickness])
+                    cube([9,m8_clearance_hole-1,1]);
+            }
 			// Mounting holes on the base.
 			//translate([0,-base_thickness/2,0])
 			translate(
@@ -474,6 +515,8 @@ echo("bhmh", mounting_holes)
 		}
 	}
 
+    // optical sensor hole
+
     translate([large_wheel_translation[0]-filament_feed_hole_offset,
         idler_mounting_hole_up+large_wheel_translation[1],
         wade_block_depth/2]){
@@ -483,6 +526,12 @@ echo("bhmh", mounting_holes)
 
         translate([-0.75-0.5,0, -0.8-2.4])
             cube([10, 10, 2.4]);
+
+        translate([-0.75-0.5,1, -0.8-2.4])
+            cube([10, 10, 4.9]);
+
+        translate([-0.75-0.5,3, -0.8-2.4+2])
+            cube([21, 10, 2]);
 
         translate([0, 0, -2.45])
             cube([3, 10, 4.9]);
@@ -501,7 +550,7 @@ module motor_mount()
 		barbell(block_top_right-[0,15],motor_hole(1),5,nema17_support_d/2,100,60);
 
 		//Connect motor mount to base.
-		barbell([base_length-base_leadout,
+		barbell([base_length-base_leadout-7,
 			0],motor_hole(3),base_thickness/2,
 			nema17_support_d/2,100,60);
 	}
@@ -578,18 +627,18 @@ module wadeidler()
 		}
 
 		//Filament Path
-		translate(idler_axis+[2+guide_height,+idler_long_side-idler_long_bottom-guide_length/2,0])
+	    translate(idler_axis+[2+guide_height,+idler_long_side-idler_long_bottom-guide_length/2,0])
 		{
-		cube([7,guide_length+2,filament_diameter+0.5],center=true);
-		translate([-7/2,0,0])
-		rotate([90,0,0])
-		cylinder(h=guide_length+4,r=(filament_diameter+0.5)/2,center=true,$fn=16);
+    		cube([7,guide_length+2,filament_diameter+0.5],center=true);
+    		translate([-7/2,0,0])
+    		rotate([90,0,0])
+    		cylinder(h=guide_length+4,r=(filament_diameter+0.5)/2,center=true,$fn=16);
 		}
 
 		//Back of idler.
 		translate(idler_axis+[-idler_height/2+2-idler_height,
 			idler_long_side/2-idler_long_bottom-10,0])
-		cube([idler_height,idler_long_side,idler_short_side+2],center=true);
+		    cube([idler_height,idler_long_side,idler_short_side+2],center=true);
 
 		//Slot for idler fulcrum mount.
 		translate(idler_fulcrum)
@@ -610,9 +659,9 @@ module wadeidler()
 				cylinder(h=idler_608_height,r=idler_608_diameter/2,
 					center=true,$fn=60);
 				for (i=[0,1])
-				rotate([180*i,0,0])
-				translate([0,0,6.9/2])
-				cylinder(r1=12/2,r2=16/2,h=2);
+		            rotate([180*i,0,0])
+		                translate([0,0,6.9/2])
+	                        cylinder(r1=12/2,r2=16/2,h=2);
 			}
 			cylinder(h=idler_short_side-6,r=m8_diameter/2-0.25/*Tight*/,
 				center=true,$fn=20);
@@ -620,13 +669,13 @@ module wadeidler()
 
 		//Fulcrum hole.
 		translate(idler_fulcrum)
-		rotate(180/8)
-		cylinder(h=idler_short_side+2,r=m3_diameter/2-0.1,center=true,$fn=8);
+		    rotate(180/8)
+	            cylinder(h=idler_short_side+2,r=m3_diameter/2-0.1,center=true,$fn=8);
 
 		//Nut trap for fulcrum screw.
 		translate(idler_fulcrum+[0,0,idler_short_side/2-idler_hinge_width-1])
-		rotate(360/16)
-		cylinder(h=3,r=m3_nut_diameter/2,$fn=6);
+	        rotate(360/16)
+		        cylinder(h=3,r=m3_nut_diameter/2,$fn=6);
 
 		for(idler_screw_hole=[-1,1])
 		translate(idler_axis+[2-idler_height,0,0])
@@ -721,12 +770,16 @@ module malcolm_hotend_holes ()
 //groovemount_holes ();
 module groovemount_holes ()
 {
-	extruder_recess_d=16.4;
-	extruder_recess_h=4.5;
+	extruder_recess_d = 16.4;
+	extruder_recess_h = 3.9;
+    extruder_inner_h = extruder_recess_h + 0.3;
+	extruder_inner_d = 7;
 
 	// Recess in base
 	translate([0,0,-1])
-	cylinder(r=extruder_recess_d/2,h=extruder_recess_h+1, $fn=50);
+    cylinder(r=extruder_recess_d/2,h=extruder_recess_h+1, $fn=50);
+    cylinder(r=extruder_inner_d/2,h=extruder_inner_h+1, $fn=50);
+
 }
 
 //peek_reprapsource_holes ();
