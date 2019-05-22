@@ -24,9 +24,9 @@ module x_carriage_base(){
      translate([-36,20,0]) cube([39,16,12]);
  }
  // Base plate
- translate([-41-5,-11.5-6,0]) cube([49+10,68+6+6, 12]);
- translate([-41-5,-11.5-6,0]) cube([15,68+6+6+3, 12]);
- translate([-1.5,-11.5-6,0]) cube([15,68+6+6+3, 12]);
+ translate([-41-5,-11.5-6,0]) cube([49+10,68+6+6+3, 12]);
+ //translate([-41-5,-11.5-6,0]) cube([15,68+6+6+3, 12]);
+ //translate([-1.5,-11.5-6,0]) cube([15,68+6+6+3, 12]);
 }
 
 module x_carriage_beltcut(){
@@ -59,48 +59,48 @@ module x_carriage_beltcut(){
 
 module x_carriage_holes(){
  // Small bearing holder holes cutter
-  translate([-33/2,2,0]) rotate([0,0,90]) horizontal_bearing_holes(2, 1);
+  translate([-33/2,2,0]) rotate([0,0,90]) horizontal_bearing_holes(2, 0);
  // Long bearing holder holes cutter
-  translate([-33/2,x_rod_distance+2,0]) rotate([0,0,90]) horizontal_bearing_holes(2, 1);
+  translate([-33/2,x_rod_distance+2,0]) rotate([0,0,90]) horizontal_bearing_holes(2, 0);
   // Extruder mounting holes
-  translate([-16.5+15,24+2,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-  translate([-16.5+15,24+2,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
-  translate([-16.5-15,24+2,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-  translate([-16.5-15,24+2,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
-  translate([-16.5+1,24+31+2,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-  translate([-16.5+1,24+31+2,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
+  translate([-16.5+16,58,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+  translate([-16.5+16,58,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
+  translate([-16.5-16,58,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+  translate([-16.5-16,58,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
+  //translate([-16.5+1,24+31+2,-1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+  //translate([-16.5+1,24+31+2,7])cylinder(r=M3_nut_diameter/2, h=20, $fn=6);
 }
 
 module x_carriage_fancy(){
  // Top right corner
- translate([13.5, 0,0]) translate([0,45+12.5,-1]) rotate([0,0,45]) translate([0,-15,0]) cube([30,30,20]);
+ translate([17, 0,0]) translate([0,45+12.5,-1]) rotate([0,0,45]) translate([0,-15,0]) cube([30,30,20]);
  // Bottom right corner
- translate([13.5,5,0]) translate([0,-12.5,-1]) rotate([0,0,-45]) translate([0,-15,0]) cube([30,30,20]);
+ translate([17,5,0]) translate([0,-12.5,-1]) rotate([0,0,-45]) translate([0,-15,0]) cube([30,30,20]);
  // Bottom ĺeft corner
- translate([-33-13.5,5,0]) translate([0,-12.5,-1]) rotate([0,0,-135]) translate([0,-15,0]) cube([30,30,20]);
+ translate([-33-17,5,0]) translate([0,-12.5,-1]) rotate([0,0,-135]) translate([0,-15,0]) cube([30,30,20]);
  // Top left corner
- translate([-33-13.5,0,0]) translate([0,45+12.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);
+ translate([-33-17,0,0]) translate([0,45+12.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);
 }
 
 module x_carriage_mountholes(){
     translate([-16.5, 0, 0]){
-        translate([+20,-10, 4.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([+20,-10, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
+        translate([+25,-10, 6.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+        translate([+25,-10, -1])cylinder(r=M3_nut_diameter/2, h=7, $fn=6);
 
-        translate([-20, -10, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([-20, -10, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
+        translate([-25, -10, 6.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+        translate([-25, -10, -1])cylinder(r=M3_nut_diameter/2, h=7, $fn=6);
 
-        translate([+25, 25, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([+25, 25, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
+        translate([+25, 25, 6.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+        translate([+25, 25, -1])cylinder(r=M3_nut_diameter/2, h=7, $fn=6);
 
-        translate([-25, 25, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([-25, 25, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
+        translate([-25, 25, 6.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+        translate([-25, 25, -1])cylinder(r=M3_nut_diameter/2, h=7, $fn=6);
 
-        translate([+20, 60, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([+20, 60, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
+        translate([+25, 60, 6.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+        translate([+25, 60, -1])cylinder(r=M3_nut_diameter/2, h=7, $fn=6);
 
-        translate([-20, 60, 5.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
-        translate([-20, 60, -1])cylinder(r=M3_nut_diameter/2, h=6, $fn=6);
+        translate([-25, 60, 6.1])cylinder(r=M3_diameter/2, h=20, $fn=32);
+        translate([-25, 60, -1])cylinder(r=M3_nut_diameter/2, h=7, $fn=6);
     }
 }
 
