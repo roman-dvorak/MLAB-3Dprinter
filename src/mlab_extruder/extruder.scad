@@ -1,4 +1,4 @@
-
+$fn = 70;
 use <../Extruder_filament_1.75mm/extruder_model.scad>
 
 motor_a = 42 + 0.4; // hrana motoru
@@ -12,25 +12,32 @@ motor_support_thickness = 10;
 
 gear_d = 9; // prumer - podavaci kolecko
 gear_l = 13;
+gear_d2 = 13; // prumer priruby
+
 
 bearing_d = 5;
 bearing_D = 16;
 bearing_b = 5;
 
-base_thickness = 5;
+base_thickness = 7;
 base_top_overlap = 5;
 
 M3_screw_d = 3.25;
-M3_head_d = 6;
+M3_head_d = 6.3;
+M3_nut_e = 6;
 
-HE_flange_d = 21;
+HE_flange_d = 16 + 0.3;
 HE_flange_h = 3.9;
-HE_flange_outd = 10;
+HE_flange_outd = 16;
+HE_flange_depth = 3; // hloubka zapusteni do dilu
 
 HE_flange_thickness = 3.9+5;
 HE_flange_width = HE_flange_d + 13;
 
 HE_height = 55;
+wall_width = 0;
+
+PTFE_d = 4 + 0.3;
 
 module extruder_01(){
     y_posuv = gear_d/2;
@@ -40,14 +47,14 @@ module extruder_01(){
             translate([-motor_a/2 - base_top_overlap, -motor_a/2, 0])
                 cube([motor_a + base_top_overlap, motor_a+y_posuv, base_thickness + motor_axis_l]);
 
-            translate([motor_a/2 , -motor_a/2, 0])
-                cube([base_thickness, motor_a+y_posuv, base_thickness + motor_axis_l + 15]);
+            translate([motor_a/2 , -motor_a/2 - wall_width, 0])
+                cube([base_thickness, motor_a+y_posuv + wall_width*2, base_thickness + motor_axis_l + 15]);
 
-            translate([motor_a/2 , y_posuv - HE_flange_width/2, 0])
-                cube([base_thickness+HE_flange_thickness, HE_flange_width, base_thickness + motor_axis_l/2]);
+            //translate([motor_a/2 , y_posuv - HE_flange_width/2, 0])
+            //    cube([base_thickness+HE_flange_thickness, HE_flange_width, base_thickness + motor_axis_l/2]);
 
-            translate([motor_a/2 , -motor_a/2, 0])
-                cube([base_thickness+HE_height, motor_a + y_posuv, base_thickness]);
+            //translate([motor_a/2 , -motor_a/2, 0])
+            //    cube([base_thickness+HE_height, motor_a + y_posuv, base_thickness]);
 
 
             //translate([motor_a/2 , motor_a/2, 0])
@@ -59,18 +66,26 @@ module extruder_01(){
 
     // Srouby pro pridelani motoru extruderu
         for(x = [[-motor_screw_l/2, motor_screw_l/2, 0],[-motor_screw_l/2, -motor_screw_l/2,0],
-            [motor_screw_l/2, -motor_screw_l/2, 0],[motor_screw_l/2, motor_screw_l/2, 0]]) {
+            [motor_screw_l/2, -motor_screw_l/2, 0]]) {
             translate(x){
-                translate([0, 0, base_thickness-2+0.2])
-                    cylinder(h=100, d=M3_screw_d, $fn = 40);
+                translate([0, 0, 10+0.1])
+                    cylinder(h=100, d=M3_screw_d, $fn = 80);
                 translate([0, 0, -0.1])
-                    cylinder(h=base_thickness-2+0.1, d=M3_head_d, $fn = 40);
+                    cylinder(h=10+0.1, d=M3_head_d, $fn = 80);
             }
         }
 
+        translate([motor_screw_l/2, motor_screw_l/2, 0]){
+            translate([0, 0, base_thickness-2+0.2])
+                cylinder(h=100, d=M3_screw_d, $fn = 40);
+            translate([0, 0, -0.1])
+                cylinder(h=base_thickness-2+0.1, d=M3_head_d, $fn = 80);
+        }
+
+    // Dira pro sroub drzici pritlacne lozisko.
         translate([-motor_screw_l/2-5, motor_a/2+y_posuv-18, base_thickness + motor_axis_l/2])
             rotate([-90, 0, 0])
-                cylinder(d=3.3, h=50, $fn=50);
+                cylinder(d=3.3, h=50, $fn=80);
         translate([-motor_screw_l/2-5-60+3, motor_a/2+y_posuv-5, base_thickness + motor_axis_l/2 - 3])
             cube([60, 3, 6]);
 
@@ -81,10 +96,10 @@ module extruder_01(){
         // vyrez pro kolo extruderu
         hull(){
             translate([0, 0, base_thickness])
-                cylinder(d = 9+2, h = motor_axis_l, $fn=40);
+                cylinder(d = 9+1.5, h = motor_axis_l, $fn=80);
 
             translate([0, -10, base_thickness])
-                cylinder(d = 22, h = motor_axis_l, $fn=40);
+                cylinder(d = 22, h = motor_axis_l, $fn=80);
 
             translate([-(motor_a - motor_support_thickness*2)/2, -motor_a/2-0.1, base_thickness])
                 cube([motor_a - motor_support_thickness*2, y_posuv, motor_axis_l+0.1]);
@@ -93,6 +108,9 @@ module extruder_01(){
         // Vyrez pro osazeni motoru
         translate([0, 0, base_thickness+motor_axis_l-2.5])
             cylinder(d = 25, h = 2.6);
+
+        translate([0, 0, base_thickness+motor_axis_l-2.5-6])
+            cylinder(d = 14, h = 2.6 + 6);
 
         // Vyrez pro pritlacne lozisko
         hull(){
@@ -105,27 +123,54 @@ module extruder_01(){
         // Cesta pro filament
         translate([0, y_posuv, base_thickness + motor_axis_l/2])
             rotate([0, 90, 0]){
-                translate([0, 0, -100]) cylinder(h=200, d=2, $fn=40);
-                translate([0, 0, 0]) cylinder(h=motor_axis_l/2, d1=2.5, d2=2, $fn=40);
-                translate([0, 0, -motor_axis_l/2 - base_top_overlap- 10]) cylinder(h=motor_axis_l/2, d1=3, d2=2, $fn=40);
+                translate([0, 0, -100]) cylinder(h=200, d=2.5, $fn=40);
+                translate([0, 0, 0]) cylinder(h = 100, d = PTFE_d, $fn=40);
+                //translate([0, 0, -motor_axis_l/2 - base_top_overlap- 10]) cylinder(h=motor_axis_l/2, d1=3, d2=2, $fn=40);
             }
 
         // priruba HE
         translate([motor_a/2+base_thickness, y_posuv, base_thickness+motor_axis_l/2])
             rotate([0, 90, 0]){
-                cylinder(h=HE_flange_h, d=HE_flange_d, $fn=60);
-                cylinder(h=15, d=HE_flange_outd, $fn=60);
-                translate([0,0,-0.6]) cylinder(h=15, d=HE_flange_outd, $fn=60);
+                translate([0, 0, -HE_flange_depth])
+                    cylinder(h=HE_flange_h, d=HE_flange_d, $fn=60);
+                translate([0, 0, -HE_flange_depth - 2.5])
+                    cylinder(h=5, d=11, $fn=60);
             }
 
-        // Diry pro pridelani priruby
-        translate([motor_a/2 + base_thickness + 3, y_posuv + HE_flange_d/3*2, base_thickness/2]){
-            cylinder(h=100, d=M3_screw_d, $fn=60);
-            translate([-3, -3, 3]) cube([6, 20, 3]);
-        }
-        translate([motor_a/2 + base_thickness + 3, y_posuv - HE_flange_d/3*2, base_thickness/2]){
-            cylinder(h=100, d=M3_screw_d, $fn=60);
-            translate([-3,-20+3, 3]) cube([6, 20, 3]);
+
+        // diry pro sroub pro pridelani HE
+        translate([0, y_posuv - 16.5, base_thickness+motor_axis_l/2])
+            rotate([0, 90, 0]){
+                    cylinder(h=100, d=3.3, $fn=60);
+                translate([0, 0, motor_a/2 - 1])
+                    cylinder(h=3.5, d=6.5, $fn=6);
+                translate([-30, -6.6/2, motor_a/2 - 1])
+                    cube([30, 6.6, 3.5]);
+
+            }
+
+        translate([0, y_posuv + 16.5, base_thickness+motor_axis_l/2])
+            rotate([0, 90, 0]){
+                    cylinder(h=100, d=3.3, $fn=60);
+                translate([0, 0, motor_a/2 - 1])
+                    cylinder(h=3, d=6.6, $fn=6);
+                //translate([-30, -2.75, motor_a/2 - 1])
+                //    cube([30, 5.5, 3]);
+
+            }
+
+
+        // Diry pro pridelani k X ose...
+        translate([-4, y_posuv/2, base_thickness]){
+            translate([60, -16, -40]) cylinder(h=100, d=M3_screw_d, $fn = 50);
+            translate([60, +16, -40]) cylinder(h=100, d=M3_screw_d, $fn = 50);
+            translate([-5, -16, -40]) cylinder(h=100, d=M3_screw_d, $fn = 50);
+            translate([-5, +16, -40]) cylinder(h=100, d=M3_screw_d, $fn = 50);
+
+            translate([60, -16, -3]) cylinder(h=100, d=M3_head_d, $fn = 50);
+            translate([60, +16, -3]) cylinder(h=100, d=M3_head_d, $fn = 50);
+            translate([-5, -16, -3]) cylinder(h=100, d=M3_head_d, $fn = 50);
+            translate([-5, +16, -3]) cylinder(h=100, d=M3_head_d, $fn = 50);
         }
 
         translate([HE_height + base_thickness+13,-5,0])
@@ -166,7 +211,6 @@ module extruder_03(){
         }
     }
 }
-translate([0,0,-20]) extruder_03();
 
 
 module extruder_02(){
@@ -214,18 +258,22 @@ module extruder_02(){
 }
 
 
-fan_width = 15.3;
+fan_width = 19.5;
+fan_height = 35;
 HB_d = 21;
-HB_height = 20;
+HB_height = 24;
+wall = 1.5;
 
 module extruder_04(){
     difference(){
         union(){
-            translate([-(HB_d+2)/2, 0, 0]) cube([HB_d+2, (HB_d+2)/2, 21]);
+            translate([-(HB_d+wall*2)/2, 0, 0]) cube([HB_d+wall*2, (HB_d+wall*2)/2, HB_height+1]);
             hull(){
-                translate([-fan_width/2-1, -20, 0]) cube([fan_width+2, 1, 21]);
-                cylinder(h=HB_height+1, d=HB_d+2, $fn=60);
+                translate([-fan_width/2-wall, -20, 0]) cube([fan_width+wall*2, 1, HB_height+1]);
+                cylinder(h=HB_height+1, d=HB_d+wall*2, $fn=60);
             }
+            translate([-fan_width/2-wall, - 21, 0]) cube([fan_width+2*wall, 6+wall, fan_height]);
+
         }
 
         union(){
@@ -234,14 +282,14 @@ module extruder_04(){
                 translate([-fan_width/2, -21, 1]) cube([fan_width, 20/2, HB_height-1]);
             }
 
-            translate([-fan_width/2, -20-5, 1]) cube([fan_width, 20/2, HB_height+1]);
+            translate([-fan_width/2, -20-5, 1]) cube([fan_width, 20/2, fan_height+1]);
 
             translate([0, 0, 1]) cylinder(h=HB_height-1, d=HB_d);
             translate([-HB_d/2, 0, 1]) cube([HB_d, 23/2, HB_height-1]);
 
             hull(){
-                translate([0, 0, HB_height+0.2]) cylinder(h=HB_height+1, d=16);
-                translate([0, 20, HB_height+0.2]) cylinder(h=HB_height+1, d=16);
+                translate([0, 0, HB_height]) cylinder(h=HB_height+1, d=16);
+                translate([0, 20, HB_height]) cylinder(h=HB_height+1, d=16);
             }
 
             hull(){
@@ -250,6 +298,9 @@ module extruder_04(){
             }
         }
     }
+
+
+    translate([-11, -17, HB_height/2-1])cube([22, 14, 0.6]);
 }
 
 module extruder_05(){
@@ -274,4 +325,6 @@ module extruder_05(){
 echo("4x DIN912:M3x", 2+7+motor_axis_l);
 
 extruder_01();
-translate([31/2, 31/2, base_thickness]) rotate([0, 0, 180]) extruder_02();
+//translate([0,0,-20]) extruder_03();
+//extruder_04();
+//translate([31/2, 31/2, base_thickness]) rotate([0, 0, 180]) extruder_02();
