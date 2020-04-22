@@ -18,6 +18,7 @@ height = 58;
 width = 21;
 
 nut_classic = 0;
+nut_lead = 1;
 
 module x_end_base(){
   // Hlavni blok
@@ -25,10 +26,14 @@ module x_end_base(){
   // Drzak loziska
   translate([-12,0,0]) rotate([0,0,90]) vertical_bearing_base();
   // Hexagon
+  
   if(nut_classic){
     // Osmihran
-    translate(v=[-4,-17,0]) rotate([0,0,30]) cylinder(h = 3+5, r=12, $fn = 6);    
-  } else{   
+    translate(v=[-4,-17,0]) rotate([0,0,30]) cylinder(h = 3+5, r=12, $fn = 6);
+  } else if(nut_lead){
+    translate([0,-17,0]) rotate([0,0,30]) cylinder(h = 3+5, r=25/2, $fn = 60);
+  }
+  else{   
     translate(v=[-4,-17,0]) rotate([0,0,30]) cylinder(h = 3+4+3, r=12, $fn = 6);
   }
   }
@@ -53,16 +58,36 @@ module x_end_holes(){
 }
 
   // Bottom pushfit rod
-  translate([-12,-41.5,6]) rotate(a=[-90,0,0]) pushfit_rod(8.1,31);
+  translate([-12,-41.5,6]) rotate(a=[-90,0,0]) pushfit_rod(8.1+0.2,31);
   // Top pushfit rod
-  translate([-12,-41.5,rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(8.1,31);
+  translate([-12,-41.5,rod_distance+6]) rotate(a=[-90,0,0]) pushfit_rod(8.1+0.2,31);
   if(nut_classic){
     // Klasicky zapustena matka
     translate(v=[0,-17,-0.5]) cylinder(h = 4, r=3, $fn=25);
     translate(v=[0,-17,3]) rotate([0,0,30]) cylinder(h = 10, r=4.5, $fn = 6);
     // Rezerva pro pruznou spojku
     translate([0,-17,3+5]) cylinder(h = height, r=4.8, $fn=42);
-  } else {
+  } else if(nut_lead){
+    // Otvor na matku
+    //#translate([0,-17,-0.1]) cylinder(h = 4, r=3.3, $fn=25);
+    translate([0,-17,-0.1]) cylinder(h = 100, d=10.5+0.4, $fn=45);
+      
+    translate([0,-17,-0.1]+[0, 15.5/2, 0]){
+        cylinder(h = 15, d=3.3, $fn=25);
+        translate([0, 0, 8-2]) cylinder(h = 5, d=6.4, $fn=6);
+    }
+    translate([0,-17,-0.1]+[0, -15.5/2, 0]){
+        cylinder(h = 15, d=3.3, $fn=25);
+        translate([0, 0, 8-2]) cylinder(h = 5, d=6.4, $fn=6);
+    }
+    translate([0,-17,-0.1]+[15.5/2, 0, 0]){
+        cylinder(h = 15, d=3.3, $fn=25);
+        rotate(30) translate([0, 0, 8-2]) cylinder(h = 5, d=6.4, $fn=6);
+    }
+   
+   
+  }
+   else {
     // Otvor na matku
     translate([0,-17,-0.1]) cylinder(h = 4, r=3.3, $fn=25);
     translate([0,-17,3+4.1+0.3]) cylinder(h = 4, r=3.3, $fn=25);
@@ -85,7 +110,7 @@ module x_end_plain(){
 x_end_plain();
 
 module pushfit_rod(diameter,length){
- cylinder(h = length, r=diameter/2, $fn=30);
+ cylinder(h = length, r=diameter/2, $fn=50);
  difference(){
  	translate([0,-diameter/2.85,length/2]) rotate([0,0,45]) cube(size = [diameter/2,diameter/2,length], center = true);
  	translate([0,-diameter/4-diameter/2-0.4,length/2]) rotate([0,0,0]) cube(size = [diameter,diameter/2,length], center = true);

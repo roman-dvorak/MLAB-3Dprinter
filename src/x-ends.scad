@@ -25,9 +25,9 @@ module x_end_idler_right_holes(){
    translate([-1.6-width/2+11/2+0.8,-26,30.25]) rotate([0,-90,0]) cylinder(r1=5,r2=3.1,h=1);
  }
  // Prisroubovani loziska 2x624
- translate([-1.6,-26,30.25]) rotate([0,-90,0]) cylinder(r=3.8,h=2,$fn=32,center=true);
- translate([-1.5-width+3.4,-26,30.25])rotate(a=[0,-90,0])cylinder(h = 3.5, r=3.9, $fn=6);
- translate([0,-26,30.25]) rotate(a=[0,-90,0]) cylinder(h = 40, r=2.2, $fn=30);
+ translate([-1.6,-26,30.25]) rotate([0,-90,0]) cylinder(d=6.5,h=2,$fn=32,center=true);
+ translate([-1.5-width+3.4,-26,30.25])rotate(a=[0,-90,0])cylinder(h = 3.5, d=6.5, $fn=6);
+ translate([0,-26,30.25]) rotate(a=[0,-90,0]) cylinder(h = 40, d=3.2, $fn=30);
 } 
  
 module x_end_idler_left_holes(){
@@ -58,5 +58,5 @@ module x_end_idler_left(){
 }
 
 x_end_idler_left();
-translate([20,0,0]) mirror([1,0,0]) x_end_idler_right();
+translate([27,0,0]) mirror([1,0,0]) x_end_idler_right();
 

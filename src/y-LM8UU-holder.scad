@@ -26,6 +26,8 @@ lm8uu_length=24;
 lm8uu_radius = lm8uu_diameter / 2;
 block_height = 2*lm8uu_length+17;
 
+screw_dist = 37.4;
+
 //cut_corners(true, false, true, false); 
 
 module cut_corners(lf,lb,rf,rb)
@@ -57,14 +59,16 @@ module y_linear_bearings()
 {
   difference()
   {
-	union()
+	hull()
 	{
-	  translate([0,0,1.5]) cube(size = [26,14,3], center = true);
-	  translate([-13,0,0])rotate(a=[0,0,30])cylinder(h = 3, r=7, $fn=6);
-	  translate([13,0,0])rotate(a=[0,0,30])cylinder(h = 3, r=7, $fn=6); 
+	  translate([0,0,2]) cube(size = [10,28.5,4], center = true);
+	  translate([-screw_dist/2,0,0])rotate(a=[0,0,30])cylinder(h=4, r=7, $fn=6);
+	  translate([screw_dist/2,0,0])rotate(a=[0,0,30])cylinder(h=4, r=7, $fn=6); 
 	}
-	translate([-14,0,-0.1])cylinder(r=m3_diameter/2, h=10, $fn = 16);
-	translate([14,0,-0.1])cylinder(r=m3_diameter/2, h=10, $fn = 16);
+	translate([-screw_dist/2,0,-0.1])cylinder(r=m3_diameter/2, h=10, $fn = 16);
+	translate([screw_dist/2,0,-0.1])cylinder(r=m3_diameter/2, h=10, $fn = 16);
+	  translate([screw_dist/2,0,3]) cylinder(d=6.5, h=30, $fn = 32);
+	  translate([-screw_dist/2,0,3]) cylinder(d=6.5, h=30, $fn = 32);
 
 	//hack
 	translate([0,14.25,4.5]) rotate(a=[90,0,0]) translate([0,9.5,0]) rotate(a=[0,0,90])
@@ -92,8 +96,8 @@ module lm8uu_bearing_holder()
 	  }
 	  
 	  translate([-2,0,12.5]) ziptie();
-	  translate([-14+3,14,14.25]) rotate([0,90,0]) cylinder(r=7/2, h=30, $fn = 32);
-	  translate([-14+3,-14,14.25]) rotate([0,90,0]) cylinder(r=7/2, h=30, $fn = 32);
+	  translate([-14+3,screw_dist/2,14.25]) rotate([0,90,0]) cylinder(r=7/2, h=30, $fn = 32);
+	  translate([-14+3,-screw_dist/2,14.25]) rotate([0,90,0]) cylinder(r=7/2, h=30, $fn = 32);
 	}
 	translate([-(10-5.5)/2-5.5,0,0.75]) cube(size = [10-5.5,20,1.5], center = true);
 	translate([-(10-5.5)/2-5.5,0,lm8uu_length+3.75]) cube(size = [10-5.5,20,1.5], center = true);
